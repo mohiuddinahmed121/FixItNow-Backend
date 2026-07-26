@@ -1,11 +1,10 @@
 import bcrypt from "bcryptjs";
-import jwt, { JwtPayload, SignOptions } from "jsonwebtoken";
-
+import { JwtPayload, SignOptions } from "jsonwebtoken";
 import { ActiveStatus } from "../../../generated/prisma/enums";
-import config from "../../config";
 import { prisma } from "../../lib/prisma";
 import { jwtUtils } from "../../utils/jwt";
 import { ILoginUser, IRegisterUser } from "./auth.interface";
+import config from "../../config";
 
 const registerUser = async (payload: IRegisterUser) => {
    const isUserExist = await prisma.user.findUnique({
@@ -48,8 +47,10 @@ const registerUser = async (payload: IRegisterUser) => {
       config.jwt_refresh_expires_in as SignOptions,
    );
 
+   const { password, ...userWithoutPassword } = user;
+
    return {
-      user,
+      user: userWithoutPassword,
       accessToken,
       refreshToken,
    };
@@ -58,11 +59,15 @@ const registerUser = async (payload: IRegisterUser) => {
 const loginUser = async (payload: ILoginUser) => {
    const { email, password } = payload;
 
-   const user = await prisma.user.findUniqueOrThrow({
+   const user = await prisma.user.findUnique({
       where: {
          email,
       },
    });
+
+   if (!user) {
+      throw new Error("User not found");
+   }
 
    if (user.activeStatus === ActiveStatus.BLOCKED) {
       throw new Error("Your account has been blocked. Please contact support.");
@@ -93,8 +98,10 @@ const loginUser = async (payload: ILoginUser) => {
       config.jwt_refresh_expires_in as SignOptions,
    );
 
+   const { password: _, ...userWithoutPassword } = user;
+
    return {
-      user,
+      user: userWithoutPassword,
       accessToken,
       refreshToken,
    };
@@ -141,6 +148,9 @@ const getMe = async (userId: string) => {
    return await prisma.user.findUniqueOrThrow({
       where: {
          id: userId,
+      },
+      omit: {
+         password: true,
       },
       include: {
          technicianProfile: true,
