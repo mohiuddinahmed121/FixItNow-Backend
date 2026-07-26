@@ -9,10 +9,24 @@ const updateProfile = async (userId: string, payload: IUpdateTechnicianProfile) 
    });
 
    if (!technician) {
+      if (
+         payload.experience === undefined ||
+         payload.skills === undefined ||
+         payload.location === undefined ||
+         payload.hourlyRate === undefined
+      ) {
+         throw new Error("experience, skills, location and hourlyRate are required");
+      }
+
       return await prisma.technicianProfile.create({
          data: {
-            ...payload,
             userId,
+            bio: payload.bio,
+            experience: payload.experience,
+            skills: payload.skills,
+            location: payload.location,
+            hourlyRate: payload.hourlyRate,
+            isAvailable: payload.isAvailable ?? true,
          },
       });
    }

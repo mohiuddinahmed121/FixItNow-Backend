@@ -6,7 +6,7 @@ import { notFound } from "./middlewares/notFound";
 
 import { authRoutes } from "./modules/auth/auth.routes";
 // import { userRoutes } from "./modules/user/user.routes";
-// import { technicianRoutes } from "./modules/technician/technician.routes";
+import { technicianRoutes } from "./modules/technician/technician.routes";
 import { categoryRoutes } from "./modules/category/category.routes";
 // import { serviceRoutes } from "./modules/service/service.routes";
 // import { bookingRoutes } from "./modules/booking/booking.routes";
@@ -37,7 +37,7 @@ app.get("/", (req: Request, res: Response) => {
 // // Routes
 app.use("/api/auth", authRoutes);
 // app.use("/api/users", userRoutes);
-// app.use("/api/technician", technicianRoutes);
+app.use("/api/technician", technicianRoutes);
 app.use("/api/categories", categoryRoutes);
 // app.use("/api/services", serviceRoutes);
 // app.use("/api/bookings", bookingRoutes);
