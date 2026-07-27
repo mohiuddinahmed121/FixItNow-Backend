@@ -51,7 +51,25 @@ const createService = async (userId: string, payload: ICreateService) => {
    return service;
 };
 
-const getAllServices = async () => {};
+const getAllServices = async () => {
+   return await prisma.service.findMany({
+      include: {
+         category: true,
+         technicianProfile: {
+            include: {
+               user: {
+                  omit: {
+                     password: true,
+                  },
+               },
+            },
+         },
+      },
+      orderBy: {
+         createdAt: "desc",
+      },
+   });
+};
 
 const getSingleService = async (id: string) => {};
 
