@@ -27,7 +27,65 @@ const getAllServices = catchAsync(async (req: Request, res: Response) => {
    });
 });
 
+const getSingleService = catchAsync(async (req: Request, res: Response) => {
+   const serviceId = req.params.serviceId;
+
+   if (!serviceId) {
+      throw new Error("Service id is required");
+   }
+
+   const result = await serviceService.getSingleService(serviceId as string);
+
+   sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Service retrieved successfully",
+      data: result,
+   });
+});
+
+const updateService = catchAsync(async (req: Request, res: Response) => {
+   const serviceId = req.params.serviceId;
+
+   if (!serviceId) {
+      throw new Error("Service id is required");
+   }
+
+   const userId = req.user!.id;
+
+   const result = await serviceService.updateService(serviceId as string, userId, req.body);
+
+   sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Service updated successfully",
+      data: result,
+   });
+});
+
+const deleteService = catchAsync(async (req: Request, res: Response) => {
+   const serviceId = req.params.serviceId;
+
+   if (!serviceId) {
+      throw new Error("Service id is required");
+   }
+
+   const userId = req.user!.id;
+
+   await serviceService.deleteService(serviceId as string, userId);
+
+   sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Service deleted successfully",
+      data: null,
+   });
+});
+
 export const serviceController = {
    createService,
    getAllServices,
+   getSingleService,
+   updateService,
+   deleteService,
 };

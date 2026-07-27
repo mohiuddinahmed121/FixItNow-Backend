@@ -71,12 +71,92 @@ const getAllServices = async () => {
    });
 };
 
-const getSingleService = async (id: string) => {};
+const getSingleService = async (serviceId: string) => {
+   const service = await prisma.service.findUniqueOrThrow({
+      where: {
+         id: serviceId,
+      },
+      include: {
+         category: true,
+         technicianProfile: {
+            include: {
+               user: {
+                  omit: {
+                     password: true,
+                  },
+               },
+            },
+         },
+      },
+   });
 
-const updateService = async (userId: string, serviceId: string, payload: IUpdateService) => {};
+   return service;
+};
 
-const deleteService = async (userId: string, serviceId: string) => {};
+const updateService = async (serviceId: string, userId: string, payload: any) => {
+   const technician = await prisma.technicianProfile.findUniqueOrThrow({
+      where: {
+         userId,
+      },
+   });
 
+   const service = await prisma.service.findUniqueOrThrow({
+      where: {
+         id: serviceId,
+      },
+   });
+
+   if (service.technicianProfileId !== technician.id) {
+      throw new Error("You are not authorized to update this service");
+   }
+
+   const updatedService = await prisma.service.update({
+      where: {
+         id: serviceId,
+      },
+      data: payload,
+      include: {
+         category: true,
+         technicianProfile: {
+            include: {
+               user: {
+                  omit: {
+                     password: true,
+                  },
+               },
+            },
+         },
+      },
+   });
+
+   return updatedService;
+};
+
+const deleteService = async (serviceId: string, userId: string) => {
+   const technician = await prisma.technicianProfile.findUniqueOrThrow({
+      where: {
+         userId,
+      },
+   });
+
+   const service = await prisma.service.findUniqueOrThrow({
+      where: {
+         id: serviceId,
+      },
+   });
+
+   if (service.technicianProfileId !== technician.id) {
+      throw new Error("You are not authorized to delete this service");
+   }
+
+   await prisma.service.delete({
+      where: {
+         id: serviceId,
+      },
+   });
+
+   return null;
+};
 export const serviceService = {
    createService,
    getAllServices,
