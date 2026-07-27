@@ -9,7 +9,7 @@ import { authRoutes } from "./modules/auth/auth.routes";
 import { technicianRoutes } from "./modules/technician/technician.routes";
 import { categoryRoutes } from "./modules/category/category.routes";
 import { serviceRoute } from "./modules/service/service.route";
-// import { bookingRoutes } from "./modules/booking/booking.routes";
+import { bookingRoutes } from "./modules/booking/booking.routes";
 // import { paymentRoutes } from "./modules/payment/payment.routes";
 // import { reviewRoutes } from "./modules/review/review.routes";
 import config from "./config";
@@ -40,7 +40,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/technician", technicianRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/services", serviceRoute);
-// app.use("/api/bookings", bookingRoutes);
+app.use("/api/bookings", bookingRoutes);
 // app.use("/api/payments", paymentRoutes);
 // app.use("/api/reviews", reviewRoutes);
 
