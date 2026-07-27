@@ -7,4 +7,6 @@ const router = Router();
 
 router.post("/", auth(Role.CUSTOMER), reviewController.createReview);
 
+router.get("/technician/:technicianProfileId", reviewController.getTechnicianReviews);
+
 export const reviewRoutes = router;

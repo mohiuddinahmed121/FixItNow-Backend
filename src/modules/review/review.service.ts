@@ -71,6 +71,43 @@ const createReview = async (customerId: string, payload: ICreateReview) => {
    return review;
 };
 
+const getTechnicianReviews = async (technicianProfileId: string) => {
+   const reviews = await prisma.review.findMany({
+      where: {
+         technicianProfileId,
+      },
+      include: {
+         customer: {
+            omit: {
+               password: true,
+            },
+         },
+      },
+      orderBy: {
+         createdAt: "desc",
+      },
+   });
+
+   const aggregate = await prisma.review.aggregate({
+      where: {
+         technicianProfileId,
+      },
+      _avg: {
+         rating: true,
+      },
+      _count: {
+         rating: true,
+      },
+   });
+
+   return {
+      averageRating: aggregate._avg.rating ?? 0,
+      totalReviews: aggregate._count.rating,
+      reviews,
+   };
+};
+
 export const reviewService = {
    createReview,
+   getTechnicianReviews,
 };
