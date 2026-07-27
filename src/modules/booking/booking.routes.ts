@@ -23,4 +23,6 @@ router.patch(
 
 router.get("/:bookingId", auth(Role.CUSTOMER), bookingController.getSingleBooking);
 
+router.patch("/:bookingId/cancel", auth(Role.CUSTOMER), bookingController.cancelBooking);
+
 export const bookingRoutes = router;

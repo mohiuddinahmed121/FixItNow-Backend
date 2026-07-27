@@ -81,10 +81,30 @@ const updateBookingStatus = catchAsync(async (req: Request, res: Response) => {
    });
 });
 
+const cancelBooking = catchAsync(async (req: Request, res: Response) => {
+   const customerId = req.user!.id;
+
+   const bookingId = req.params.bookingId;
+
+   if (!bookingId) {
+      throw new Error("Booking Id is required");
+   }
+
+   const result = await bookingService.cancelBooking(bookingId as string, customerId);
+
+   sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Booking cancelled successfully",
+      data: result,
+   });
+});
+
 export const bookingController = {
    createBooking,
    getMyBookings,
    getSingleBooking,
    getTechnicianBookings,
    updateBookingStatus,
+   cancelBooking,
 };

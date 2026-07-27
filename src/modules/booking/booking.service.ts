@@ -212,10 +212,48 @@ const updateBookingStatus = async (
    });
 };
 
+const cancelBooking = async (bookingId: string, customerId: string) => {
+   const booking = await prisma.booking.findUniqueOrThrow({
+      where: {
+         id: bookingId,
+      },
+   });
+
+   if (booking.customerId !== customerId) {
+      throw new Error("You are not authorized");
+   }
+
+   if (booking.status === BookingStatus.IN_PROGRESS || booking.status === BookingStatus.COMPLETED) {
+      throw new Error("Booking cannot be cancelled after work has started");
+   }
+
+   if (booking.status === BookingStatus.DECLINED) {
+      throw new Error("Booking is already declined");
+   }
+
+   return await prisma.booking.update({
+      where: {
+         id: bookingId,
+      },
+      data: {
+         status: BookingStatus.CANCELED,
+      },
+      include: {
+         customer: {
+            omit: {
+               password: true,
+            },
+         },
+         service: true,
+      },
+   });
+};
+
 export const bookingService = {
    createBooking,
    getMyBookings,
    getSingleBooking,
    getTechnicianBookings,
    updateBookingStatus,
+   cancelBooking,
 };

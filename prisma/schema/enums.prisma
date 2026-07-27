@@ -24,3 +24,11 @@ enum PaymentStatus {
   COMPLETED
   FAILED
 }
+
+enum PaymentMethod {
+  ONLINE
+}
+
+enum PaymentProvider {
+  STRIPE
+}

@@ -1,13 +1,13 @@
 model Service {
-  id          String   @id @default(uuid())
+  id String @id @default(uuid())
 
-  title       String   @db.VarChar(255)
-  description String   @db.Text
+  title       String @db.VarChar(255)
+  description String @db.Text
 
-  price       Float
+  price Float
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   technicianProfileId String
   technicianProfile   TechnicianProfile @relation(fields: [technicianProfileId], references: [id], onDelete: Cascade)
@@ -19,6 +19,5 @@ model Service {
 
   @@index([technicianProfileId])
   @@index([categoryId])
-
   @@map("services")
 }

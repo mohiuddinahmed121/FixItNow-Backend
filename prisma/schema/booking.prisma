@@ -2,7 +2,7 @@ model Booking {
   id String @id @default(uuid())
 
   bookingDate DateTime
-  note String? @db.Text
+  note        String?  @db.Text
 
   status BookingStatus @default(REQUESTED)
 
@@ -10,10 +10,10 @@ model Booking {
   updatedAt DateTime @updatedAt
 
   customerId String
-  customer User @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customer   User   @relation(fields: [customerId], references: [id], onDelete: Cascade)
 
   serviceId String
-  service Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
 
   payment Payment?
 
@@ -21,6 +21,5 @@ model Booking {
 
   @@index([customerId])
   @@index([serviceId])
-
   @@map("bookings")
 }

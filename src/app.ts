@@ -10,8 +10,8 @@ import { technicianRoutes } from "./modules/technician/technician.routes";
 import { categoryRoutes } from "./modules/category/category.routes";
 import { serviceRoute } from "./modules/service/service.route";
 import { bookingRoutes } from "./modules/booking/booking.routes";
-// import { paymentRoutes } from "./modules/payment/payment.routes";
-// import { reviewRoutes } from "./modules/review/review.routes";
+//import { paymentRoutes } from "./modules/payment/payment.routes";
+import { reviewRoutes } from "./modules/review/review.routes";
 import config from "./config";
 
 const app: Application = express();
@@ -41,8 +41,8 @@ app.use("/api/technician", technicianRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/services", serviceRoute);
 app.use("/api/bookings", bookingRoutes);
-// app.use("/api/payments", paymentRoutes);
-// app.use("/api/reviews", reviewRoutes);
+//app.use("/api/payments", paymentRoutes);
+app.use("/api/reviews", reviewRoutes);
 
 // // 404 Handler
 app.use(notFound);

@@ -1,10 +1,10 @@
 model Category {
-  id          String   @id @default(uuid())
-  name        String   @unique @db.VarChar(100)
-  description String?  @db.Text
+  id          String  @id @default(uuid())
+  name        String  @unique @db.VarChar(100)
+  description String? @db.Text
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   services Service[]
 

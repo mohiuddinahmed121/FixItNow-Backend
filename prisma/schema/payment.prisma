@@ -7,6 +7,10 @@ model Payment {
 
   paymentIntentId String @unique
 
+  method PaymentMethod
+
+  provider PaymentProvider
+
   status PaymentStatus @default(PENDING)
 
   paidAt DateTime?
@@ -14,10 +18,9 @@ model Payment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  bookingId String @unique
-  booking Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  bookingId String  @unique
+  booking   Booking @relation(fields: [bookingId], references: [id], onDelete: Cascade)
 
   @@index([status])
-
   @@map("payments")
 }
