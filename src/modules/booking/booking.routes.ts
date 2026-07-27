@@ -9,6 +9,18 @@ router.post("/", auth(Role.CUSTOMER), bookingController.createBooking);
 
 router.get("/", auth(Role.CUSTOMER), bookingController.getMyBookings);
 
+router.get(
+   "/technician/my-bookings",
+   auth(Role.TECHNICIAN),
+   bookingController.getTechnicianBookings,
+);
+
+router.patch(
+   "/technician/:bookingId",
+   auth(Role.TECHNICIAN),
+   bookingController.updateBookingStatus,
+);
+
 router.get("/:bookingId", auth(Role.CUSTOMER), bookingController.getSingleBooking);
 
 export const bookingRoutes = router;

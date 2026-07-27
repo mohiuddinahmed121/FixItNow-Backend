@@ -45,8 +45,46 @@ const getSingleBooking = catchAsync(async (req: Request, res: Response) => {
    });
 });
 
+const getTechnicianBookings = catchAsync(async (req: Request, res: Response) => {
+   const technicianId = req.user!.id;
+
+   const result = await bookingService.getTechnicianBookings(technicianId);
+
+   sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Technician bookings retrieved successfully",
+      data: result,
+   });
+});
+
+const updateBookingStatus = catchAsync(async (req: Request, res: Response) => {
+   const technicianId = req.user!.id;
+
+   const { bookingId } = req.params;
+
+   if (!bookingId) {
+      throw new Error("Booking Id is required");
+   }
+
+   const result = await bookingService.updateBookingStatus(
+      bookingId as string,
+      technicianId,
+      req.body.status,
+   );
+
+   sendResponse(res, {
+      success: true,
+      statusCode: httpStatus.OK,
+      message: "Booking status updated successfully",
+      data: result,
+   });
+});
+
 export const bookingController = {
    createBooking,
    getMyBookings,
    getSingleBooking,
+   getTechnicianBookings,
+   updateBookingStatus,
 };

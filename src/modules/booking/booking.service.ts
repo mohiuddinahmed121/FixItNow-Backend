@@ -117,8 +117,105 @@ const getSingleBooking = async (bookingId: string, customerId: string) => {
    return booking;
 };
 
+const getTechnicianBookings = async (technicianId: string) => {
+   const technicianProfile = await prisma.technicianProfile.findUniqueOrThrow({
+      where: {
+         userId: technicianId,
+      },
+   });
+
+   return await prisma.booking.findMany({
+      where: {
+         service: {
+            technicianProfileId: technicianProfile.id,
+         },
+      },
+      orderBy: {
+         createdAt: "desc",
+      },
+      include: {
+         customer: {
+            omit: {
+               password: true,
+            },
+         },
+         service: {
+            include: {
+               category: true,
+            },
+         },
+      },
+   });
+};
+
+const updateBookingStatus = async (
+   bookingId: string,
+   technicianId: string,
+   status: BookingStatus,
+) => {
+   const technicianProfile = await prisma.technicianProfile.findUniqueOrThrow({
+      where: {
+         userId: technicianId,
+      },
+   });
+
+   const booking = await prisma.booking.findUniqueOrThrow({
+      where: {
+         id: bookingId,
+      },
+      include: {
+         service: true,
+      },
+   });
+
+   if (booking.service.technicianProfileId !== technicianProfile.id) {
+      throw new Error("You are not authorized to update this booking");
+   }
+
+   // Status validation
+
+   if (
+      booking.status === BookingStatus.REQUESTED &&
+      status !== BookingStatus.ACCEPTED &&
+      status !== BookingStatus.DECLINED
+   ) {
+      throw new Error("Invalid booking status transition");
+   }
+
+   if (booking.status === BookingStatus.ACCEPTED && status !== BookingStatus.IN_PROGRESS) {
+      throw new Error("Invalid booking status transition");
+   }
+
+   if (booking.status === BookingStatus.IN_PROGRESS && status !== BookingStatus.COMPLETED) {
+      throw new Error("Invalid booking status transition");
+   }
+
+   if (booking.status === BookingStatus.DECLINED || booking.status === BookingStatus.COMPLETED) {
+      throw new Error("Booking can no longer be updated");
+   }
+
+   return await prisma.booking.update({
+      where: {
+         id: bookingId,
+      },
+      data: {
+         status,
+      },
+      include: {
+         customer: {
+            omit: {
+               password: true,
+            },
+         },
+         service: true,
+      },
+   });
+};
+
 export const bookingService = {
    createBooking,
    getMyBookings,
    getSingleBooking,
+   getTechnicianBookings,
+   updateBookingStatus,
 };
