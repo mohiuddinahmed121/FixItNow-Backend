@@ -9,4 +9,8 @@ router.post("/create", auth(Role.CUSTOMER), paymentController.createPayment);
 
 router.post("/webhook", express.raw({ type: "application/json" }), paymentController.stripeWebhook);
 
+router.get("/", auth(Role.CUSTOMER), paymentController.getMyPayments);
+
+router.get("/:paymentId", auth(Role.CUSTOMER), paymentController.getSinglePayment);
+
 export const paymentRoutes = router;

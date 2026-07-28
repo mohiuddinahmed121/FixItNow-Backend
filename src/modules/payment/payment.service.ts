@@ -85,7 +85,52 @@ const handleWebhook = async (payload: Buffer, signature: string) => {
    }
 };
 
+const getMyPayments = async (customerId: string) => {
+   const payments = await prisma.payment.findMany({
+      where: {
+         booking: {
+            customerId,
+         },
+      },
+      include: {
+         booking: {
+            include: {
+               service: true,
+            },
+         },
+      },
+      orderBy: {
+         createdAt: "desc",
+      },
+   });
+
+   return payments;
+};
+
+const getSinglePayment = async (customerId: string, paymentId: string) => {
+   const payment = await prisma.payment.findUniqueOrThrow({
+      where: {
+         id: paymentId,
+      },
+      include: {
+         booking: {
+            include: {
+               service: true,
+            },
+         },
+      },
+   });
+
+   if (payment.booking.customerId !== customerId) {
+      throw new Error("You are not authorized");
+   }
+
+   return payment;
+};
+
 export const paymentService = {
    createPayment,
    handleWebhook,
+   getMyPayments,
+   getSinglePayment,
 };
