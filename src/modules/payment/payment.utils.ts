@@ -1,6 +1,8 @@
 import Stripe from "stripe";
 import { stripe } from "../../lib/stripe";
 import config from "../../config";
+import { PaymentStatus, BookingStatus } from "../../../generated/prisma/enums";
+import { prisma } from "../../lib/prisma";
 
 export const createCheckoutSession = async (
    amount: number,
@@ -32,4 +34,40 @@ export const createCheckoutSession = async (
    });
 
    return session;
+};
+
+export const handleCheckoutCompleted = async (session: Stripe.Checkout.Session) => {
+   const bookingId = session.metadata?.bookingId;
+
+   if (!bookingId) {
+      console.log("Missing bookingId in metadata");
+      return;
+   }
+
+   await prisma.$transaction(async (tx) => {
+      await tx.payment.update({
+         where: {
+            bookingId,
+         },
+         data: {
+            status: PaymentStatus.COMPLETED,
+            paidAt: new Date(),
+            transactionId: session.payment_intent as string,
+         },
+      });
+
+      await tx.booking.update({
+         where: {
+            id: bookingId,
+         },
+         data: {
+            status: BookingStatus.PAID,
+         },
+      });
+   });
+};
+
+export const paymentUtils = {
+   createCheckoutSession,
+   handleCheckoutCompleted,
 };

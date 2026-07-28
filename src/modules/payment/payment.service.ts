@@ -1,4 +1,3 @@
-import crypto from "crypto";
 import {
    BookingStatus,
    PaymentMethod,
@@ -6,7 +5,10 @@ import {
    PaymentStatus,
 } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
-import { createCheckoutSession } from "./payment.utils";
+import { createCheckoutSession, handleCheckoutCompleted } from "./payment.utils";
+import { stripe } from "../../lib/stripe";
+import config from "../../config";
+import { Stripe } from "stripe";
 
 const createPayment = async (customerId: string, bookingId: string) => {
    // Booking exists?
@@ -67,6 +69,22 @@ const createPayment = async (customerId: string, bookingId: string) => {
    };
 };
 
+const handleWebhook = async (payload: Buffer, signature: string) => {
+   const endpointSecret = config.stripe_webhook_secret;
+
+   const event = stripe.webhooks.constructEvent(payload, signature, endpointSecret);
+
+   switch (event.type) {
+      case "checkout.session.completed":
+         await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
+         break;
+
+      default:
+         console.log(`Unhandled event type: ${event.type}`);
+   }
+};
+
 export const paymentService = {
    createPayment,
+   handleWebhook,
 };
