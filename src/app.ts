@@ -5,7 +5,7 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { notFound } from "./middlewares/notFound";
 
 import { authRoutes } from "./modules/auth/auth.routes";
-// import { userRoutes } from "./modules/user/user.routes";
+import { userRoutes } from "./modules/user/user.routes";
 import { technicianRoutes } from "./modules/technician/technician.routes";
 import { categoryRoutes } from "./modules/category/category.routes";
 import { serviceRoute } from "./modules/service/service.route";
@@ -36,7 +36,7 @@ app.get("/", (req: Request, res: Response) => {
 
 // // Routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/technician", technicianRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/services", serviceRoute);
