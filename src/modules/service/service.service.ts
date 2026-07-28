@@ -149,6 +149,8 @@ const deleteService = async (serviceId: string, userId: string) => {
       throw new Error("You are not authorized to delete this service");
    }
 
+   throw new Error("Cannot delete a service that has bookings.");
+
    await prisma.service.delete({
       where: {
          id: serviceId,
