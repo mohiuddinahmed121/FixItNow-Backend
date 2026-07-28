@@ -44,6 +44,14 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/services", serviceRoute);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/payments", paymentRoutes);
+app.get("/payment/success", (req, res) => {
+   res.status(200).send(" Payment Successful");
+});
+
+app.get("/payment/cancel", (req, res) => {
+   res.status(200).send(" Payment Cancelled");
+});
+
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/admin", adminRoutes);
 

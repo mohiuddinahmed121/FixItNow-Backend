@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import {
    BookingStatus,
    PaymentMethod,
@@ -52,7 +53,7 @@ const createPayment = async (customerId: string, bookingId: string) => {
          amount: booking.service.price,
 
          transactionId: crypto.randomUUID(),
-
+         //transactionId: session.payment_intent as string,
          paymentIntentId: session.id,
 
          method: PaymentMethod.ONLINE,

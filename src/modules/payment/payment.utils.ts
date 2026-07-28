@@ -53,6 +53,7 @@ export const handleCheckoutCompleted = async (session: Stripe.Checkout.Session) 
             status: PaymentStatus.COMPLETED,
             paidAt: new Date(),
             transactionId: session.payment_intent as string,
+            paymentIntentId: session.payment_intent as string,
          },
       });
 
