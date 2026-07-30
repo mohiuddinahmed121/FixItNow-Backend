@@ -4,7 +4,6 @@ import { prisma } from "../../lib/prisma";
 const createBooking = async (customerId: string, payload: any) => {
    const { serviceId, bookingDate, note } = payload;
 
-   // Service exists?
    const service = await prisma.service.findUniqueOrThrow({
       where: {
          id: serviceId,
@@ -14,7 +13,6 @@ const createBooking = async (customerId: string, payload: any) => {
       },
    });
 
-   // Technician available?
    if (!service.technicianProfile.isAvailable) {
       throw new Error("Technician is not available");
    }
@@ -172,8 +170,6 @@ const updateBookingStatus = async (
       throw new Error("You are not authorized to update this booking");
    }
 
-   // Status validation
-
    if (
       booking.status === BookingStatus.REQUESTED &&
       status !== BookingStatus.ACCEPTED &&
@@ -192,6 +188,10 @@ const updateBookingStatus = async (
 
    if (booking.status === BookingStatus.DECLINED || booking.status === BookingStatus.COMPLETED) {
       throw new Error("Booking can no longer be updated");
+   }
+
+   if (booking.status === BookingStatus.PAID && status !== BookingStatus.IN_PROGRESS) {
+      throw new Error("Invalid booking status transition");
    }
 
    return await prisma.booking.update({

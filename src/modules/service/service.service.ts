@@ -2,7 +2,6 @@ import { prisma } from "../../lib/prisma";
 import { ICreateService, IUpdateService } from "./service.interface";
 
 const createService = async (userId: string, payload: ICreateService) => {
-   // Check technician profile
    const technician = await prisma.technicianProfile.findUnique({
       where: {
          userId,
@@ -13,7 +12,6 @@ const createService = async (userId: string, payload: ICreateService) => {
       throw new Error("Technician profile not found");
    }
 
-   // Check category
    const category = await prisma.category.findUnique({
       where: {
          id: payload.categoryId,
@@ -24,7 +22,6 @@ const createService = async (userId: string, payload: ICreateService) => {
       throw new Error("Category not found");
    }
 
-   // Create service
    const service = await prisma.service.create({
       data: {
          title: payload.title,
@@ -143,13 +140,18 @@ const deleteService = async (serviceId: string, userId: string) => {
       where: {
          id: serviceId,
       },
+      include: {
+         bookings: true,
+      },
    });
 
    if (service.technicianProfileId !== technician.id) {
       throw new Error("You are not authorized to delete this service");
    }
 
-   throw new Error("Cannot delete a service that has bookings.");
+   if (service.bookings.length > 0) {
+      throw new Error("Cannot delete a service that has bookings.");
+   }
 
    await prisma.service.delete({
       where: {

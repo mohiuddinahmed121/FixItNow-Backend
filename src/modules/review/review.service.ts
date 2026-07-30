@@ -5,7 +5,6 @@ import { ICreateReview } from "./review.interface";
 const createReview = async (customerId: string, payload: ICreateReview) => {
    const { bookingId, rating, comment } = payload;
 
-   // Booking exists?
    const booking = await prisma.booking.findUniqueOrThrow({
       where: {
          id: bookingId,
@@ -19,17 +18,14 @@ const createReview = async (customerId: string, payload: ICreateReview) => {
       },
    });
 
-   // Only booking owner can review
    if (booking.customerId !== customerId) {
       throw new Error("You are not authorized to review this booking");
    }
 
-   // Booking must be completed
    if (booking.status !== BookingStatus.COMPLETED) {
       throw new Error("You can only review after the service is completed");
    }
 
-   // Prevent duplicate review
    const existingReview = await prisma.review.findUnique({
       where: {
          bookingId,

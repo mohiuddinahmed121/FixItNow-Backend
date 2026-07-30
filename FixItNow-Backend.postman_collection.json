@@ -1,0 +1,2907 @@
+{
+  "info": {
+    "_postman_id": "575d0cad-5879-4ca9-92bf-7c0324e554ad",
+    "name": "FixItNow-Backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "56298098",
+    "_collection_link": "https://go.postman.co/collection/56298098-575d0cad-5879-4ca9-92bf-7c0324e554ad?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Register Technician",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Karim Electric Service\",\r\n  \"email\": \"karim@gmail.com\",\r\n  \"password\": \"12345678\",\r\n  \"phone\": \"01822222222\",\r\n  \"role\": \"TECHNICIAN\",\r\n  \"address\": \"Uttara, Dhaka\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Customer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"rahimahmed@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{customer_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{technician_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\": \"mesbah@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Register Customer",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Rahim Ahmed\",\r\n  \"email\": \"rahimahmed@gmail.com\",\r\n  \"password\": \"12345678\",\r\n  \"phone\": \"01711111111\",\r\n  \"role\": \"CUSTOMER\",\r\n  \"address\": \"Mirpur, Dhaka\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/register",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "register"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Register Customer",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Rahim Ahmed\",\r\n  \"email\": \"rahimahmed@gmail.com\",\r\n  \"password\": \"12345678\",\r\n  \"phone\": \"01711111111\",\r\n  \"role\": \"CUSTOMER\",\r\n  \"address\": \"Mirpur, Dhaka\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/auth/register",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "register"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "86"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"56-dgJQbYRSibz6KurnEzv6DtBGuSo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 03:54:29 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": false,\n    \"statusCode\": 400,\n    \"message\": \"User already exists\",\n    \"errorDetails\": null\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login Technician",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"karim@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login Admin",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"mesbah@gmail.com\",\r\n  \"password\": \"123456\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Technician",
+      "item": [
+        {
+          "name": "Get My Profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{technician_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"email\": \"karim@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/me",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "me"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get My Profile",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"email\": \"karim@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/auth/me",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "auth",
+                    "me"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "718"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2ce-/z7JB6uBy+hVmIadSUYhcmQOZTg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 04:47:19 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Profile retrieved successfully\",\n    \"data\": {\n        \"id\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\",\n        \"name\": \"Karim Electric Service\",\n        \"email\": \"karim@gmail.com\",\n        \"phone\": null,\n        \"role\": \"TECHNICIAN\",\n        \"activeStatus\": \"ACTIVE\",\n        \"createdAt\": \"2026-07-30T03:51:18.032Z\",\n        \"updatedAt\": \"2026-07-30T03:51:18.032Z\",\n        \"technicianProfile\": {\n            \"id\": \"73b0f267-a8e1-46ff-abae-dd4a46509674\",\n            \"bio\": \"Professional electrician with 6 years of experience\",\n            \"experience\": 6,\n            \"skills\": [\n                \"Electrical Wiring\",\n                \"Fan Repair\",\n                \"Switch Installation\"\n            ],\n            \"location\": \"Uttara, Dhaka\",\n            \"hourlyRate\": 900,\n            \"isAvailable\": true,\n            \"createdAt\": \"2026-07-30T04:46:48.399Z\",\n            \"updatedAt\": \"2026-07-30T04:46:48.399Z\",\n            \"userId\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\"\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Profile",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Create Profile",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"bio\": \"Professional electrician with 6 years of experience\",\r\n  \"experience\": 6,\r\n  \"skills\": [\r\n    \"Electrical Wiring\",\r\n    \"Fan Repair\",\r\n    \"Switch Installation\"\r\n  ],\r\n  \"location\": \"Uttara, Dhaka\",\r\n  \"hourlyRate\": 900,\r\n  \"isAvailable\": true\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/technician/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "technician",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "468"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1d4-ZwEDJ0kBxVg11jSUmd7CavOaJBg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 04:46:49 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Technician profile updated successfully\",\n    \"data\": {\n        \"id\": \"73b0f267-a8e1-46ff-abae-dd4a46509674\",\n        \"bio\": \"Professional electrician with 6 years of experience\",\n        \"experience\": 6,\n        \"skills\": [\n            \"Electrical Wiring\",\n            \"Fan Repair\",\n            \"Switch Installation\"\n        ],\n        \"location\": \"Uttara, Dhaka\",\n        \"hourlyRate\": 900,\n        \"isAvailable\": true,\n        \"createdAt\": \"2026-07-30T04:46:48.399Z\",\n        \"updatedAt\": \"2026-07-30T04:46:48.399Z\",\n        \"userId\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Profile",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{technician_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"experience\": 6,\r\n  \"hourlyRate\": 900,\r\n  \"isAvailable\": false\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/technician/profile",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "technician",
+                "profile"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Profile",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"experience\": 6,\r\n  \"hourlyRate\": 900,\r\n  \"isAvailable\": false\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/technician/profile",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "technician",
+                    "profile"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "469"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1d5-fuJ8jQeqVn/ekcJA/ZdE6guh89g\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 04:56:50 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Technician profile updated successfully\",\n    \"data\": {\n        \"id\": \"73b0f267-a8e1-46ff-abae-dd4a46509674\",\n        \"bio\": \"Professional electrician with 6 years of experience\",\n        \"experience\": 6,\n        \"skills\": [\n            \"Electrical Wiring\",\n            \"Fan Repair\",\n            \"Switch Installation\"\n        ],\n        \"location\": \"Uttara, Dhaka\",\n        \"hourlyRate\": 900,\n        \"isAvailable\": false,\n        \"createdAt\": \"2026-07-30T04:46:48.399Z\",\n        \"updatedAt\": \"2026-07-30T04:56:50.309Z\",\n        \"userId\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "New Request",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ],
+      "auth": {
+        "type": "bearer"
+      },
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {},
+            "exec": [
+              ""
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "Get Categories",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Get Categories",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/categories",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "categories"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "646"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"286-ICDHkoUnNlRp4c+LYsUCmE1Ipyk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 05:26:40 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Categories retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"bdf02428-2886-4f48-9b2f-53c9714f1338\",\n            \"name\": \"plumber\",\n            \"description\": \"plumber repair, wiring and installation services\",\n            \"createdAt\": \"2026-07-30T05:17:11.424Z\",\n            \"updatedAt\": \"2026-07-30T05:17:11.424Z\"\n        },\n        {\n            \"id\": \"25cb0ade-b6c2-42f9-98c8-6523fc510fcf\",\n            \"name\": \"Painting\",\n            \"description\": \"Professional painting services\",\n            \"createdAt\": \"2026-07-28T08:31:06.957Z\",\n            \"updatedAt\": \"2026-07-28T08:31:06.957Z\"\n        },\n        {\n            \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n            \"name\": \"Electrical\",\n            \"description\": null,\n            \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n            \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Electrical & Wiring\",\r\n  \"description\": \"Professional electrical repair, installation, and maintenance services\",\r\n  \"icon\": \"https://example.com/icons/electrical.png\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Category",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{admin_token}}",
+                    "type": "text"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"plumber\",\r\n  \"description\": \"plumber repair, wiring and installation services\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/categories",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "categories"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "288"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"120-fOD3+hiKRKVfyaugarSsftYsyts\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 05:17:11 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 201,\n    \"message\": \"Category created successfully\",\n    \"data\": {\n        \"id\": \"bdf02428-2886-4f48-9b2f-53c9714f1338\",\n        \"name\": \"plumber\",\n        \"description\": \"plumber repair, wiring and installation services\",\n        \"createdAt\": \"2026-07-30T05:17:11.424Z\",\n        \"updatedAt\": \"2026-07-30T05:17:11.424Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Service",
+      "item": [
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Create Service",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"AC Repair\",\r\n  \"description\": \"Professional AC repair and maintenance service\",\r\n  \"price\": 1200,\r\n  \"categoryId\": \"{{category_id}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "services"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1122"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"462-QeYBh8X28f1Ww/NJJlUK3uV+bYo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 05:36:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Services retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"title\": \"AC Repair\",\n            \"description\": \"Professional AC repair\",\n            \"price\": 1200,\n            \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n            \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n            \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n            \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n            \"category\": {\n                \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"name\": \"Electrical\",\n                \"description\": null,\n                \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n            },\n            \"technicianProfile\": {\n                \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"bio\": \"Professional Electrician\",\n                \"experience\": 5,\n                \"skills\": [\n                    \"Wiring\",\n                    \"Repair\"\n                ],\n                \"location\": \"Dhaka\",\n                \"hourlyRate\": 800,\n                \"isAvailable\": true,\n                \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n                \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n                \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                \"user\": {\n                    \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                    \"name\": \"Rahim\",\n                    \"email\": \"rahim@gmail.com\",\n                    \"phone\": null,\n                    \"role\": \"TECHNICIAN\",\n                    \"activeStatus\": \"ACTIVE\",\n                    \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                    \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n                }\n            }\n        }\n    ]\n}"
+            },
+            {
+              "name": "Create Service",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"title\": \"Fan Repair Service\",\r\n  \"description\": \"Professional ceiling and exhaust fan repair service\",\r\n  \"price\": 700,\r\n  \"categoryId\": \"{{category_id}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "services"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1287"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"507-RL+jG7qK3xH1glQnyAO9cjsjJBs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 05:59:29 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 201,\n    \"message\": \"Service created successfully\",\n    \"data\": {\n        \"id\": \"65769e8b-a4dc-4ce9-97a6-37c1c041624b\",\n        \"title\": \"Fan Repair Service\",\n        \"description\": \"Professional ceiling and exhaust fan repair service\",\n        \"price\": 700,\n        \"createdAt\": \"2026-07-30T05:59:28.850Z\",\n        \"updatedAt\": \"2026-07-30T05:59:28.850Z\",\n        \"technicianProfileId\": \"73b0f267-a8e1-46ff-abae-dd4a46509674\",\n        \"categoryId\": \"bdf02428-2886-4f48-9b2f-53c9714f1338\",\n        \"category\": {\n            \"id\": \"bdf02428-2886-4f48-9b2f-53c9714f1338\",\n            \"name\": \"plumber\",\n            \"description\": \"plumber repair, wiring and installation services\",\n            \"createdAt\": \"2026-07-30T05:17:11.424Z\",\n            \"updatedAt\": \"2026-07-30T05:17:11.424Z\"\n        },\n        \"technicianProfile\": {\n            \"id\": \"73b0f267-a8e1-46ff-abae-dd4a46509674\",\n            \"bio\": \"Professional electrician with 6 years of experience\",\n            \"experience\": 6,\n            \"skills\": [\n                \"Electrical Wiring\",\n                \"Fan Repair\",\n                \"Switch Installation\"\n            ],\n            \"location\": \"Uttara, Dhaka\",\n            \"hourlyRate\": 900,\n            \"isAvailable\": false,\n            \"createdAt\": \"2026-07-30T04:46:48.399Z\",\n            \"updatedAt\": \"2026-07-30T04:56:50.309Z\",\n            \"userId\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\",\n            \"user\": {\n                \"id\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\",\n                \"name\": \"Karim Electric Service\",\n                \"email\": \"karim@gmail.com\",\n                \"phone\": null,\n                \"role\": \"TECHNICIAN\",\n                \"activeStatus\": \"ACTIVE\",\n                \"createdAt\": \"2026-07-30T03:51:18.032Z\",\n                \"updatedAt\": \"2026-07-30T03:51:18.032Z\"\n            }\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Services",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Get All Services",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/services",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "services"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1122"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"462-QeYBh8X28f1Ww/NJJlUK3uV+bYo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 05:38:27 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Services retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"title\": \"AC Repair\",\n            \"description\": \"Professional AC repair\",\n            \"price\": 1200,\n            \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n            \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n            \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n            \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n            \"category\": {\n                \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"name\": \"Electrical\",\n                \"description\": null,\n                \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n            },\n            \"technicianProfile\": {\n                \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"bio\": \"Professional Electrician\",\n                \"experience\": 5,\n                \"skills\": [\n                    \"Wiring\",\n                    \"Repair\"\n                ],\n                \"location\": \"Dhaka\",\n                \"hourlyRate\": 800,\n                \"isAvailable\": true,\n                \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n                \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n                \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                \"user\": {\n                    \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                    \"name\": \"Rahim\",\n                    \"email\": \"rahim@gmail.com\",\n                    \"phone\": null,\n                    \"role\": \"TECHNICIAN\",\n                    \"activeStatus\": \"ACTIVE\",\n                    \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                    \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n                }\n            }\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Single Service",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Get Single Service",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/services/{{service_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "services",
+                    "{{service_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1119"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"45f-iKrHFRoCRxIiSHjLK/M/QAkjecQ\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 05:39:43 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Service retrieved successfully\",\n    \"data\": {\n        \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n        \"title\": \"AC Repair\",\n        \"description\": \"Professional AC repair\",\n        \"price\": 1200,\n        \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n        \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n        \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n        \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n        \"category\": {\n            \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n            \"name\": \"Electrical\",\n            \"description\": null,\n            \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n            \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n        },\n        \"technicianProfile\": {\n            \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n            \"bio\": \"Professional Electrician\",\n            \"experience\": 5,\n            \"skills\": [\n                \"Wiring\",\n                \"Repair\"\n            ],\n            \"location\": \"Dhaka\",\n            \"hourlyRate\": 800,\n            \"isAvailable\": true,\n            \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n            \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n            \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n            \"user\": {\n                \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                \"name\": \"Rahim\",\n                \"email\": \"rahim@gmail.com\",\n                \"phone\": null,\n                \"role\": \"TECHNICIAN\",\n                \"activeStatus\": \"ACTIVE\",\n                \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n            }\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Service",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Update Service",
+              "originalRequest": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Bearer {{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"price\": 1500\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/services/{{service_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "services",
+                    "{{service_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1288"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"508-71qdAsGQQICDswmzjSM0br4hlPw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:05:10 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Service updated successfully\",\n    \"data\": {\n        \"id\": \"65769e8b-a4dc-4ce9-97a6-37c1c041624b\",\n        \"title\": \"Fan Repair Service\",\n        \"description\": \"Professional ceiling and exhaust fan repair service\",\n        \"price\": 1500,\n        \"createdAt\": \"2026-07-30T05:59:28.850Z\",\n        \"updatedAt\": \"2026-07-30T06:05:09.853Z\",\n        \"technicianProfileId\": \"73b0f267-a8e1-46ff-abae-dd4a46509674\",\n        \"categoryId\": \"bdf02428-2886-4f48-9b2f-53c9714f1338\",\n        \"category\": {\n            \"id\": \"bdf02428-2886-4f48-9b2f-53c9714f1338\",\n            \"name\": \"plumber\",\n            \"description\": \"plumber repair, wiring and installation services\",\n            \"createdAt\": \"2026-07-30T05:17:11.424Z\",\n            \"updatedAt\": \"2026-07-30T05:17:11.424Z\"\n        },\n        \"technicianProfile\": {\n            \"id\": \"73b0f267-a8e1-46ff-abae-dd4a46509674\",\n            \"bio\": \"Professional electrician with 6 years of experience\",\n            \"experience\": 6,\n            \"skills\": [\n                \"Electrical Wiring\",\n                \"Fan Repair\",\n                \"Switch Installation\"\n            ],\n            \"location\": \"Uttara, Dhaka\",\n            \"hourlyRate\": 900,\n            \"isAvailable\": false,\n            \"createdAt\": \"2026-07-30T04:46:48.399Z\",\n            \"updatedAt\": \"2026-07-30T04:56:50.309Z\",\n            \"userId\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\",\n            \"user\": {\n                \"id\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\",\n                \"name\": \"Karim Electric Service\",\n                \"email\": \"karim@gmail.com\",\n                \"phone\": null,\n                \"role\": \"TECHNICIAN\",\n                \"activeStatus\": \"ACTIVE\",\n                \"createdAt\": \"2026-07-30T03:51:18.032Z\",\n                \"updatedAt\": \"2026-07-30T03:51:18.032Z\"\n            }\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "delete service",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "delete service",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/services/aedba6b7-fd07-4d27-b900-3d157e68a67f",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "services",
+                    "aedba6b7-fd07-4d27-b900-3d157e68a67f"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "112"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"70-0rllabfexNKl4HbUBDTDacbfaTU\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:08:31 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": false,\n    \"statusCode\": 400,\n    \"message\": \"You are not authorized to delete this service\",\n    \"errorDetails\": null\n}"
+            },
+            {
+              "name": "delete service",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/services/{{service_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "services",
+                    "{{service_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "86"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"56-DTeY1UHog2YKhReTU1LJxRQMwKQ\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:11:14 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Service deleted successfully\",\n    \"data\": null\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Booking",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Create Booking",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{customer_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"serviceId\": \"{{service_id}}\",\r\n  \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\r\n  \"note\": \"Please bring the necessary tools.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/bookings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "bookings"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1701"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"6a5-g2f9+o4vNWD7mSQEqBd4p6PX/XM\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:16:53 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 201,\n    \"message\": \"Booking created successfully\",\n    \"data\": {\n        \"id\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n        \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\n        \"note\": \"Please bring the necessary tools.\",\n        \"status\": \"REQUESTED\",\n        \"createdAt\": \"2026-07-30T06:16:53.144Z\",\n        \"updatedAt\": \"2026-07-30T06:16:53.144Z\",\n        \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n        \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n        \"customer\": {\n            \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"name\": \"Rahim Ahmed\",\n            \"email\": \"rahimahmed@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n            \"updatedAt\": \"2026-07-30T03:48:56.911Z\"\n        },\n        \"service\": {\n            \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"title\": \"AC Repair\",\n            \"description\": \"Professional AC repair\",\n            \"price\": 1200,\n            \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n            \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n            \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n            \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n            \"category\": {\n                \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"name\": \"Electrical\",\n                \"description\": null,\n                \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n            },\n            \"technicianProfile\": {\n                \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"bio\": \"Professional Electrician\",\n                \"experience\": 5,\n                \"skills\": [\n                    \"Wiring\",\n                    \"Repair\"\n                ],\n                \"location\": \"Dhaka\",\n                \"hourlyRate\": 800,\n                \"isAvailable\": true,\n                \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n                \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n                \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                \"user\": {\n                    \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                    \"name\": \"Rahim\",\n                    \"email\": \"rahim@gmail.com\",\n                    \"phone\": null,\n                    \"role\": \"TECHNICIAN\",\n                    \"activeStatus\": \"ACTIVE\",\n                    \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                    \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n                }\n            }\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "My Bookings",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "My Bookings",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{customer_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/bookings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "bookings"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1464"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"5b8-GOCOGskoJ9pfjPwKWNSPDcyYFR8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:19:38 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Bookings retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n            \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\n            \"note\": \"Please bring the necessary tools.\",\n            \"status\": \"REQUESTED\",\n            \"createdAt\": \"2026-07-30T06:16:53.144Z\",\n            \"updatedAt\": \"2026-07-30T06:16:53.144Z\",\n            \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"service\": {\n                \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n                \"title\": \"AC Repair\",\n                \"description\": \"Professional AC repair\",\n                \"price\": 1200,\n                \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n                \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"category\": {\n                    \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                    \"name\": \"Electrical\",\n                    \"description\": null,\n                    \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                    \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n                },\n                \"technicianProfile\": {\n                    \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                    \"bio\": \"Professional Electrician\",\n                    \"experience\": 5,\n                    \"skills\": [\n                        \"Wiring\",\n                        \"Repair\"\n                    ],\n                    \"location\": \"Dhaka\",\n                    \"hourlyRate\": 800,\n                    \"isAvailable\": true,\n                    \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n                    \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n                    \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                    \"user\": {\n                        \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                        \"name\": \"Rahim\",\n                        \"email\": \"rahim@gmail.com\",\n                        \"phone\": null,\n                        \"role\": \"TECHNICIAN\",\n                        \"activeStatus\": \"ACTIVE\",\n                        \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                        \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n                    }\n                }\n            }\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Technician Bookings",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Technician Bookings",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/bookings/technician/my-bookings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "bookings",
+                    "technician",
+                    "my-bookings"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2216"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"8a8-ekVH1DRDeD+me+/uLogccAXJs1o\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:30:51 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Technician bookings retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n            \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\n            \"note\": \"Please bring the necessary tools.\",\n            \"status\": \"REQUESTED\",\n            \"createdAt\": \"2026-07-30T06:16:53.144Z\",\n            \"updatedAt\": \"2026-07-30T06:16:53.144Z\",\n            \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"customer\": {\n                \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n                \"name\": \"Rahim Ahmed\",\n                \"email\": \"rahimahmed@gmail.com\",\n                \"phone\": null,\n                \"role\": \"CUSTOMER\",\n                \"activeStatus\": \"ACTIVE\",\n                \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n                \"updatedAt\": \"2026-07-30T03:48:56.911Z\"\n            },\n            \"service\": {\n                \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n                \"title\": \"AC Repair\",\n                \"description\": \"Professional AC repair\",\n                \"price\": 1200,\n                \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n                \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"category\": {\n                    \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                    \"name\": \"Electrical\",\n                    \"description\": null,\n                    \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                    \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n                }\n            }\n        },\n        {\n            \"id\": \"d76a4bc0-a69e-4b96-b18d-ab1659ae13b8\",\n            \"bookingDate\": \"2026-08-10T10:00:00.000Z\",\n            \"note\": \"Please bring necessary tools.\",\n            \"status\": \"PAID\",\n            \"createdAt\": \"2026-07-27T07:01:46.645Z\",\n            \"updatedAt\": \"2026-07-28T13:19:16.832Z\",\n            \"customerId\": \"b79f9373-cf87-46ca-b4a6-e88b55e88d5d\",\n            \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"customer\": {\n                \"id\": \"b79f9373-cf87-46ca-b4a6-e88b55e88d5d\",\n                \"name\": \"Mesbah\",\n                \"email\": \"mesbah123@gmail.com\",\n                \"phone\": null,\n                \"role\": \"CUSTOMER\",\n                \"activeStatus\": \"ACTIVE\",\n                \"createdAt\": \"2026-07-26T14:08:45.848Z\",\n                \"updatedAt\": \"2026-07-26T14:08:45.848Z\"\n            },\n            \"service\": {\n                \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n                \"title\": \"AC Repair\",\n                \"description\": \"Professional AC repair\",\n                \"price\": 1200,\n                \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n                \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"category\": {\n                    \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                    \"name\": \"Electrical\",\n                    \"description\": null,\n                    \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                    \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n                }\n            }\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update Booking Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{technician_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"ACCEPTED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/bookings/technician/{{booking_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "bookings",
+                "technician",
+                "{{booking_id}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update Booking Status",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"ACCEPTED\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/bookings/technician/{{booking_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "bookings",
+                    "technician",
+                    "{{booking_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "980"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3d4-ZMBSyh6vim+jF8n6zBVjimX6+gI\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:34:39 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Booking status updated successfully\",\n    \"data\": {\n        \"id\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n        \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\n        \"note\": \"Please bring the necessary tools.\",\n        \"status\": \"ACCEPTED\",\n        \"createdAt\": \"2026-07-30T06:16:53.144Z\",\n        \"updatedAt\": \"2026-07-30T06:34:38.804Z\",\n        \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n        \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n        \"customer\": {\n            \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"name\": \"Rahim Ahmed\",\n            \"email\": \"rahimahmed@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n            \"updatedAt\": \"2026-07-30T03:48:56.911Z\"\n        },\n        \"service\": {\n            \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"title\": \"AC Repair\",\n            \"description\": \"Professional AC repair\",\n            \"price\": 1200,\n            \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n            \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n            \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n            \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\"\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Cancel Booking",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        },
+        {
+          "name": "Single Booking",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Single Booking",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{customer_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/bookings/{{booking_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "bookings",
+                    "{{booking_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1732"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"6c4-dVDc3izKqLI2WDh1/ohHNaC9H8E\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:21:36 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Booking retrieved successfully\",\n    \"data\": {\n        \"id\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n        \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\n        \"note\": \"Please bring the necessary tools.\",\n        \"status\": \"REQUESTED\",\n        \"createdAt\": \"2026-07-30T06:16:53.144Z\",\n        \"updatedAt\": \"2026-07-30T06:16:53.144Z\",\n        \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n        \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n        \"customer\": {\n            \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"name\": \"Rahim Ahmed\",\n            \"email\": \"rahimahmed@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n            \"updatedAt\": \"2026-07-30T03:48:56.911Z\"\n        },\n        \"service\": {\n            \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"title\": \"AC Repair\",\n            \"description\": \"Professional AC repair\",\n            \"price\": 1200,\n            \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n            \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n            \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n            \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n            \"category\": {\n                \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"name\": \"Electrical\",\n                \"description\": null,\n                \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n            },\n            \"technicianProfile\": {\n                \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"bio\": \"Professional Electrician\",\n                \"experience\": 5,\n                \"skills\": [\n                    \"Wiring\",\n                    \"Repair\"\n                ],\n                \"location\": \"Dhaka\",\n                \"hourlyRate\": 800,\n                \"isAvailable\": true,\n                \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n                \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n                \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                \"user\": {\n                    \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                    \"name\": \"Rahim\",\n                    \"email\": \"rahim@gmail.com\",\n                    \"phone\": null,\n                    \"role\": \"TECHNICIAN\",\n                    \"activeStatus\": \"ACTIVE\",\n                    \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                    \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n                }\n            }\n        },\n        \"payment\": null,\n        \"review\": null\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Payment",
+      "item": [
+        {
+          "name": "Get My Payments",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{technician_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"status\": \"COMPLETED\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/bookings/technician/{{booking_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "bookings",
+                "technician",
+                "{{booking_id}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get My Payments",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{technician_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"status\": \"COMPLETED\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/bookings/technician/{{booking_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "bookings",
+                    "technician",
+                    "{{booking_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "981"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3d5-0DOAYWlASTWEuZuPC2AHfl+w9oE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:53:42 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Booking status updated successfully\",\n    \"data\": {\n        \"id\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n        \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\n        \"note\": \"Please bring the necessary tools.\",\n        \"status\": \"COMPLETED\",\n        \"createdAt\": \"2026-07-30T06:16:53.144Z\",\n        \"updatedAt\": \"2026-07-30T06:53:41.885Z\",\n        \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n        \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n        \"customer\": {\n            \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"name\": \"Rahim Ahmed\",\n            \"email\": \"rahimahmed@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n            \"updatedAt\": \"2026-07-30T03:48:56.911Z\"\n        },\n        \"service\": {\n            \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"title\": \"AC Repair\",\n            \"description\": \"Professional AC repair\",\n            \"price\": 1200,\n            \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n            \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n            \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n            \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\"\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Payment Details",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{customer_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/payments/{{payment_id}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "{{payment_id}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get Payment Details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{customer_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/payments/{{payment_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "{{payment_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1117"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"45d-2jvWLVlYX+7ow0J7+CFxXVNnYW4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:42:07 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Payment retrieved successfully\",\n    \"data\": {\n        \"id\": \"4345d8c2-3b2f-46ce-870a-a929fbaedccb\",\n        \"amount\": 1200,\n        \"transactionId\": \"pi_3TyneREKnOc7IhZc0T0V49E6\",\n        \"paymentIntentId\": \"pi_3TyneREKnOc7IhZc0T0V49E6\",\n        \"method\": \"ONLINE\",\n        \"provider\": \"STRIPE\",\n        \"status\": \"COMPLETED\",\n        \"paidAt\": \"2026-07-30T06:41:08.324Z\",\n        \"createdAt\": \"2026-07-30T06:37:18.816Z\",\n        \"updatedAt\": \"2026-07-30T06:41:08.328Z\",\n        \"bookingId\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n        \"booking\": {\n            \"id\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n            \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\n            \"note\": \"Please bring the necessary tools.\",\n            \"status\": \"PAID\",\n            \"createdAt\": \"2026-07-30T06:16:53.144Z\",\n            \"updatedAt\": \"2026-07-30T06:41:08.397Z\",\n            \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"service\": {\n                \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n                \"title\": \"AC Repair\",\n                \"description\": \"Professional AC repair\",\n                \"price\": 1200,\n                \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n                \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\"\n            }\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "{{customer_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"bookingId\": \"{{booking_id}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments/create",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "create"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Create Payment",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{customer_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"bookingId\": \"{{booking_id}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/payments/create",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "payments",
+                    "create"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "994"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"3e2-ILQnjduU+OMvtv5YsGuR2tsX9yo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:37:18 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Checkout session created successfully\",\n    \"data\": {\n        \"checkoutUrl\": \"https://checkout.stripe.com/c/pay/cs_test_a1JvRdfxNT5diOC0390WgGsoeqwGrmHDDgPPI7RUExPZSuZdz0TSKf6xxY#fidnandhYHdWcXxpYCc%2FJ2FgY2RwaXEnKSdicGRmZGhqaWBTZHdsZGtxJz8nZmprcXdqaScpJ2R1bE5gfCc%2FJ3VuWnFgdnFaMDRRfXVGdkBOa0pmMkxtX2ZES0hPfFRyYDxLXWJKN1RMVHI0cE5GZ2J1Q2ZVR1VQfGh8aUNRU0tcQl9SUl9jZF9VTElnaGFLYE5hbHVhQUNjNWEzNmxhbXE1NUZzN39wRzxnJyknY3dqaFZgd3Ngdyc%2FcXdwYCknZ2RmbmJ3anBrYUZqaWp3Jz8nJmNjY2NjYycpJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl\",\n        \"payment\": {\n            \"id\": \"4345d8c2-3b2f-46ce-870a-a929fbaedccb\",\n            \"amount\": 1200,\n            \"transactionId\": \"788aab22-effa-4096-adce-96e2601b2d00\",\n            \"paymentIntentId\": \"cs_test_a1JvRdfxNT5diOC0390WgGsoeqwGrmHDDgPPI7RUExPZSuZdz0TSKf6xxY\",\n            \"method\": \"ONLINE\",\n            \"provider\": \"STRIPE\",\n            \"status\": \"PENDING\",\n            \"paidAt\": null,\n            \"createdAt\": \"2026-07-30T06:37:18.816Z\",\n            \"updatedAt\": \"2026-07-30T06:37:18.816Z\",\n            \"bookingId\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\"\n        }\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Review",
+      "item": [
+        {
+          "name": "Create Review",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Create Review",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{customer_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"bookingId\": \"{{booking_id}}\",\r\n  \"rating\": 5,\r\n  \"comment\": \"Excellent AC repair service. The technician was professional and completed the work properly.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/reviews",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reviews"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1280"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"500-ITuF7ZsF2syx6dwqe3PxlsyoboA\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:56:10 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 201,\n    \"message\": \"Review created successfully\",\n    \"data\": {\n        \"id\": \"4ebede65-a70a-4737-bd82-d4eb02581129\",\n        \"rating\": 5,\n        \"comment\": \"Excellent AC repair service. The technician was professional and completed the work properly.\",\n        \"createdAt\": \"2026-07-30T06:56:09.881Z\",\n        \"updatedAt\": \"2026-07-30T06:56:09.881Z\",\n        \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n        \"bookingId\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n        \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n        \"customer\": {\n            \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"name\": \"Rahim Ahmed\",\n            \"email\": \"rahimahmed@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n            \"updatedAt\": \"2026-07-30T03:48:56.911Z\"\n        },\n        \"technicianProfile\": {\n            \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n            \"bio\": \"Professional Electrician\",\n            \"experience\": 5,\n            \"skills\": [\n                \"Wiring\",\n                \"Repair\"\n            ],\n            \"location\": \"Dhaka\",\n            \"hourlyRate\": 800,\n            \"isAvailable\": true,\n            \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n            \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n            \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n            \"user\": {\n                \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                \"name\": \"Rahim\",\n                \"email\": \"rahim@gmail.com\",\n                \"phone\": null,\n                \"role\": \"TECHNICIAN\",\n                \"activeStatus\": \"ACTIVE\",\n                \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n            }\n        }\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Technician Reviews",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Get Technician Reviews",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/api/reviews/technician/{{technician_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "reviews",
+                    "technician",
+                    "{{technician_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "1344"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"540-AlZAmofuiyqF3aJfDHvqYlWibGk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 06:59:11 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Reviews retrieved successfully\",\n    \"data\": {\n        \"averageRating\": 5,\n        \"totalReviews\": 2,\n        \"reviews\": [\n            {\n                \"id\": \"4ebede65-a70a-4737-bd82-d4eb02581129\",\n                \"rating\": 5,\n                \"comment\": \"Excellent AC repair service. The technician was professional and completed the work properly.\",\n                \"createdAt\": \"2026-07-30T06:56:09.881Z\",\n                \"updatedAt\": \"2026-07-30T06:56:09.881Z\",\n                \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n                \"bookingId\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"customer\": {\n                    \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n                    \"name\": \"Rahim Ahmed\",\n                    \"email\": \"rahimahmed@gmail.com\",\n                    \"phone\": null,\n                    \"role\": \"CUSTOMER\",\n                    \"activeStatus\": \"ACTIVE\",\n                    \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n                    \"updatedAt\": \"2026-07-30T03:48:56.911Z\"\n                }\n            },\n            {\n                \"id\": \"fed0b8f5-6810-4086-99fe-e1f1b4215aba\",\n                \"rating\": 5,\n                \"comment\": \"Excellent service\",\n                \"createdAt\": \"2026-07-28T04:33:50.677Z\",\n                \"updatedAt\": \"2026-07-28T04:33:50.677Z\",\n                \"customerId\": \"b79f9373-cf87-46ca-b4a6-e88b55e88d5d\",\n                \"bookingId\": \"d76a4bc0-a69e-4b96-b18d-ab1659ae13b8\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"customer\": {\n                    \"id\": \"b79f9373-cf87-46ca-b4a6-e88b55e88d5d\",\n                    \"name\": \"Mesbah\",\n                    \"email\": \"mesbah123@gmail.com\",\n                    \"phone\": null,\n                    \"role\": \"CUSTOMER\",\n                    \"activeStatus\": \"ACTIVE\",\n                    \"createdAt\": \"2026-07-26T14:08:45.848Z\",\n                    \"updatedAt\": \"2026-07-26T14:08:45.848Z\"\n                }\n            }\n        ]\n    }\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Admin",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Get All Users",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{admin_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/admin/users",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "users"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "2515"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"9d3-4B0YXdJrMWJAodYtazs521M/tB4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 07:03:19 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Users retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\",\n            \"name\": \"Karim Electric Service\",\n            \"email\": \"karim@gmail.com\",\n            \"phone\": null,\n            \"role\": \"TECHNICIAN\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-30T03:51:18.032Z\",\n            \"updatedAt\": \"2026-07-30T03:51:18.032Z\",\n            \"technicianProfile\": {\n                \"id\": \"73b0f267-a8e1-46ff-abae-dd4a46509674\",\n                \"bio\": \"Professional electrician with 6 years of experience\",\n                \"experience\": 6,\n                \"skills\": [\n                    \"Electrical Wiring\",\n                    \"Fan Repair\",\n                    \"Switch Installation\"\n                ],\n                \"location\": \"Uttara, Dhaka\",\n                \"hourlyRate\": 900,\n                \"isAvailable\": false,\n                \"createdAt\": \"2026-07-30T04:46:48.399Z\",\n                \"updatedAt\": \"2026-07-30T04:56:50.309Z\",\n                \"userId\": \"2fe26182-781f-4ea1-bca9-7848bab49ec9\"\n            }\n        },\n        {\n            \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"name\": \"Rahim Ahmed\",\n            \"email\": \"rahimahmed@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n            \"updatedAt\": \"2026-07-30T03:48:56.911Z\",\n            \"technicianProfile\": null\n        },\n        {\n            \"id\": \"b7d33069-7e86-4925-aef4-6314e8872111\",\n            \"name\": \"Mohiuddin\",\n            \"email\": \"mohiuddin@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-28T16:12:51.103Z\",\n            \"updatedAt\": \"2026-07-28T16:12:51.103Z\",\n            \"technicianProfile\": null\n        },\n        {\n            \"id\": \"0d03dcdd-fb73-4905-b339-6436154fe382\",\n            \"name\": \"Muaj\",\n            \"email\": \"customer@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-28T03:51:20.800Z\",\n            \"updatedAt\": \"2026-07-28T08:22:28.252Z\",\n            \"technicianProfile\": null\n        },\n        {\n            \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n            \"name\": \"Rahim\",\n            \"email\": \"rahim@gmail.com\",\n            \"phone\": null,\n            \"role\": \"TECHNICIAN\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n            \"updatedAt\": \"2026-07-26T16:36:08.002Z\",\n            \"technicianProfile\": {\n                \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"bio\": \"Professional Electrician\",\n                \"experience\": 5,\n                \"skills\": [\n                    \"Wiring\",\n                    \"Repair\"\n                ],\n                \"location\": \"Dhaka\",\n                \"hourlyRate\": 800,\n                \"isAvailable\": true,\n                \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n                \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n                \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\"\n            }\n        },\n        {\n            \"id\": \"b79f9373-cf87-46ca-b4a6-e88b55e88d5d\",\n            \"name\": \"Mesbah\",\n            \"email\": \"mesbah123@gmail.com\",\n            \"phone\": null,\n            \"role\": \"CUSTOMER\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-26T14:08:45.848Z\",\n            \"updatedAt\": \"2026-07-26T14:08:45.848Z\",\n            \"technicianProfile\": null\n        },\n        {\n            \"id\": \"c23e4fa8-e325-42c9-9b2c-4354a0a76465\",\n            \"name\": \"Mesbah\",\n            \"email\": \"mesbah@gmail.com\",\n            \"phone\": null,\n            \"role\": \"ADMIN\",\n            \"activeStatus\": \"ACTIVE\",\n            \"createdAt\": \"2026-07-26T12:06:21.290Z\",\n            \"updatedAt\": \"2026-07-26T12:06:21.290Z\",\n            \"technicianProfile\": null\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Ban/Unban User",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Ban/Unban User",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{admin_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"activeStatus\": \"BLOCKED\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/admin/users/{{user_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "users",
+                    "{{user_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "314"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"13a-y7HSezT4ziw7l/UxPPSMP7LuAOg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 07:10:32 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"User status updated successfully\",\n    \"data\": {\n        \"id\": \"b7d33069-7e86-4925-aef4-6314e8872111\",\n        \"name\": \"Mohiuddin\",\n        \"email\": \"mohiuddin@gmail.com\",\n        \"phone\": null,\n        \"role\": \"CUSTOMER\",\n        \"activeStatus\": \"BLOCKED\",\n        \"createdAt\": \"2026-07-28T16:12:51.103Z\",\n        \"updatedAt\": \"2026-07-30T07:10:32.271Z\"\n    }\n}"
+            },
+            {
+              "name": "Ban/Unban User",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{admin_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"activeStatus\": \"ACTIVE\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/admin/users/{{user_id}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "users",
+                    "{{user_id}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "313"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"139-Y4kJzz5/3KxC6v8ELXj0zJYWPl4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 07:11:46 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"User status updated successfully\",\n    \"data\": {\n        \"id\": \"b7d33069-7e86-4925-aef4-6314e8872111\",\n        \"name\": \"Mohiuddin\",\n        \"email\": \"mohiuddin@gmail.com\",\n        \"phone\": null,\n        \"role\": \"CUSTOMER\",\n        \"activeStatus\": \"ACTIVE\",\n        \"createdAt\": \"2026-07-28T16:12:51.103Z\",\n        \"updatedAt\": \"2026-07-30T07:11:46.826Z\"\n    }\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get All Bookings",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Get All Bookings",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{admin_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/admin/bookings",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "bookings"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "4839"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"12e7-Gq0uR9xWuc/sttYHx8sLOII54Ls\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 07:12:18 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Bookings retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n            \"bookingDate\": \"2026-08-15T10:00:00.000Z\",\n            \"note\": \"Please bring the necessary tools.\",\n            \"status\": \"COMPLETED\",\n            \"createdAt\": \"2026-07-30T06:16:53.144Z\",\n            \"updatedAt\": \"2026-07-30T06:53:41.885Z\",\n            \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n            \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"customer\": {\n                \"id\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n                \"name\": \"Rahim Ahmed\",\n                \"email\": \"rahimahmed@gmail.com\",\n                \"phone\": null,\n                \"role\": \"CUSTOMER\",\n                \"activeStatus\": \"ACTIVE\",\n                \"createdAt\": \"2026-07-30T03:48:56.911Z\",\n                \"updatedAt\": \"2026-07-30T03:48:56.911Z\"\n            },\n            \"service\": {\n                \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n                \"title\": \"AC Repair\",\n                \"description\": \"Professional AC repair\",\n                \"price\": 1200,\n                \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n                \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"category\": {\n                    \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                    \"name\": \"Electrical\",\n                    \"description\": null,\n                    \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                    \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n                },\n                \"technicianProfile\": {\n                    \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                    \"bio\": \"Professional Electrician\",\n                    \"experience\": 5,\n                    \"skills\": [\n                        \"Wiring\",\n                        \"Repair\"\n                    ],\n                    \"location\": \"Dhaka\",\n                    \"hourlyRate\": 800,\n                    \"isAvailable\": true,\n                    \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n                    \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n                    \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                    \"user\": {\n                        \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                        \"name\": \"Rahim\",\n                        \"email\": \"rahim@gmail.com\",\n                        \"phone\": null,\n                        \"role\": \"TECHNICIAN\",\n                        \"activeStatus\": \"ACTIVE\",\n                        \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                        \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n                    }\n                }\n            },\n            \"payment\": {\n                \"id\": \"4345d8c2-3b2f-46ce-870a-a929fbaedccb\",\n                \"amount\": 1200,\n                \"transactionId\": \"pi_3TyneREKnOc7IhZc0T0V49E6\",\n                \"paymentIntentId\": \"pi_3TyneREKnOc7IhZc0T0V49E6\",\n                \"method\": \"ONLINE\",\n                \"provider\": \"STRIPE\",\n                \"status\": \"COMPLETED\",\n                \"paidAt\": \"2026-07-30T06:41:08.324Z\",\n                \"createdAt\": \"2026-07-30T06:37:18.816Z\",\n                \"updatedAt\": \"2026-07-30T06:41:08.328Z\",\n                \"bookingId\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\"\n            },\n            \"review\": {\n                \"id\": \"4ebede65-a70a-4737-bd82-d4eb02581129\",\n                \"rating\": 5,\n                \"comment\": \"Excellent AC repair service. The technician was professional and completed the work properly.\",\n                \"createdAt\": \"2026-07-30T06:56:09.881Z\",\n                \"updatedAt\": \"2026-07-30T06:56:09.881Z\",\n                \"customerId\": \"6776079c-b39c-49be-9396-f1c6dc735314\",\n                \"bookingId\": \"489d2e6d-d12c-44c0-a4cb-f9e8c3c87c2a\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\"\n            }\n        },\n        {\n            \"id\": \"d76a4bc0-a69e-4b96-b18d-ab1659ae13b8\",\n            \"bookingDate\": \"2026-08-10T10:00:00.000Z\",\n            \"note\": \"Please bring necessary tools.\",\n            \"status\": \"PAID\",\n            \"createdAt\": \"2026-07-27T07:01:46.645Z\",\n            \"updatedAt\": \"2026-07-28T13:19:16.832Z\",\n            \"customerId\": \"b79f9373-cf87-46ca-b4a6-e88b55e88d5d\",\n            \"serviceId\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n            \"customer\": {\n                \"id\": \"b79f9373-cf87-46ca-b4a6-e88b55e88d5d\",\n                \"name\": \"Mesbah\",\n                \"email\": \"mesbah123@gmail.com\",\n                \"phone\": null,\n                \"role\": \"CUSTOMER\",\n                \"activeStatus\": \"ACTIVE\",\n                \"createdAt\": \"2026-07-26T14:08:45.848Z\",\n                \"updatedAt\": \"2026-07-26T14:08:45.848Z\"\n            },\n            \"service\": {\n                \"id\": \"aedba6b7-fd07-4d27-b900-3d157e68a67f\",\n                \"title\": \"AC Repair\",\n                \"description\": \"Professional AC repair\",\n                \"price\": 1200,\n                \"createdAt\": \"2026-07-27T06:55:47.513Z\",\n                \"updatedAt\": \"2026-07-27T06:55:47.513Z\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                \"categoryId\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                \"category\": {\n                    \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n                    \"name\": \"Electrical\",\n                    \"description\": null,\n                    \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n                    \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n                },\n                \"technicianProfile\": {\n                    \"id\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\",\n                    \"bio\": \"Professional Electrician\",\n                    \"experience\": 5,\n                    \"skills\": [\n                        \"Wiring\",\n                        \"Repair\"\n                    ],\n                    \"location\": \"Dhaka\",\n                    \"hourlyRate\": 800,\n                    \"isAvailable\": true,\n                    \"createdAt\": \"2026-07-26T16:39:14.826Z\",\n                    \"updatedAt\": \"2026-07-26T16:39:14.826Z\",\n                    \"userId\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                    \"user\": {\n                        \"id\": \"eec517dc-6c8a-4b19-a41d-5bd7962994b0\",\n                        \"name\": \"Rahim\",\n                        \"email\": \"rahim@gmail.com\",\n                        \"phone\": null,\n                        \"role\": \"TECHNICIAN\",\n                        \"activeStatus\": \"ACTIVE\",\n                        \"createdAt\": \"2026-07-26T16:36:08.002Z\",\n                        \"updatedAt\": \"2026-07-26T16:36:08.002Z\"\n                    }\n                }\n            },\n            \"payment\": {\n                \"id\": \"581baf3b-0705-47e0-9305-fea9f3804005\",\n                \"amount\": 1200,\n                \"transactionId\": \"pi_3TyAudEKnOc7IhZc10gG5F7r\",\n                \"paymentIntentId\": \"pi_3TyAudEKnOc7IhZc10gG5F7r\",\n                \"method\": \"ONLINE\",\n                \"provider\": \"STRIPE\",\n                \"status\": \"COMPLETED\",\n                \"paidAt\": \"2026-07-28T13:19:16.740Z\",\n                \"createdAt\": \"2026-07-28T13:05:31.281Z\",\n                \"updatedAt\": \"2026-07-28T13:19:16.756Z\",\n                \"bookingId\": \"d76a4bc0-a69e-4b96-b18d-ab1659ae13b8\"\n            },\n            \"review\": {\n                \"id\": \"fed0b8f5-6810-4086-99fe-e1f1b4215aba\",\n                \"rating\": 5,\n                \"comment\": \"Excellent service\",\n                \"createdAt\": \"2026-07-28T04:33:50.677Z\",\n                \"updatedAt\": \"2026-07-28T04:33:50.677Z\",\n                \"customerId\": \"b79f9373-cf87-46ca-b4a6-e88b55e88d5d\",\n                \"bookingId\": \"d76a4bc0-a69e-4b96-b18d-ab1659ae13b8\",\n                \"technicianProfileId\": \"5e8ba588-ca3b-425f-8376-e2ca4b44ec94\"\n            }\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get Categories",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Get Categories",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{admin_token}}",
+                    "type": "text"
+                  }
+                ],
+                "url": {
+                  "raw": "{{base_url}}/api/admin/categories",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "categories"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "646"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"286-ICDHkoUnNlRp4c+LYsUCmE1Ipyk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 07:13:22 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 200,\n    \"message\": \"Categories retrieved successfully\",\n    \"data\": [\n        {\n            \"id\": \"bdf02428-2886-4f48-9b2f-53c9714f1338\",\n            \"name\": \"plumber\",\n            \"description\": \"plumber repair, wiring and installation services\",\n            \"createdAt\": \"2026-07-30T05:17:11.424Z\",\n            \"updatedAt\": \"2026-07-30T05:17:11.424Z\"\n        },\n        {\n            \"id\": \"25cb0ade-b6c2-42f9-98c8-6523fc510fcf\",\n            \"name\": \"Painting\",\n            \"description\": \"Professional painting services\",\n            \"createdAt\": \"2026-07-28T08:31:06.957Z\",\n            \"updatedAt\": \"2026-07-28T08:31:06.957Z\"\n        },\n        {\n            \"id\": \"5ffdb696-c879-4311-b907-b386eded4f16\",\n            \"name\": \"Electrical\",\n            \"description\": null,\n            \"createdAt\": \"2026-07-26T16:11:22.587Z\",\n            \"updatedAt\": \"2026-07-26T16:11:22.587Z\"\n        }\n    ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": [
+            {
+              "name": "Create Category",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "{{admin_token}}",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"name\": \"Cleaning\",\r\n  \"description\": \"Home and office cleaning services\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{base_url}}/api/admin/categories",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "api",
+                    "admin",
+                    "categories"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": null,
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Access-Control-Allow-Origin",
+                  "value": "http://localhost:5000"
+                },
+                {
+                  "key": "Vary",
+                  "value": "Origin"
+                },
+                {
+                  "key": "Access-Control-Allow-Credentials",
+                  "value": "true"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "274"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"112-6ortCyyTfvvYlkOTZTk/AKm/Kmo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Thu, 30 Jul 2026 07:14:40 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"success\": true,\n    \"statusCode\": 201,\n    \"message\": \"Category created successfully\",\n    \"data\": {\n        \"id\": \"bb8584be-f2fb-4bc5-8530-88682f6877e6\",\n        \"name\": \"Cleaning\",\n        \"description\": \"Home and office cleaning services\",\n        \"createdAt\": \"2026-07-30T07:14:40.010Z\",\n        \"updatedAt\": \"2026-07-30T07:14:40.010Z\"\n    }\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}

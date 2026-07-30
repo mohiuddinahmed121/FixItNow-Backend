@@ -12,7 +12,6 @@ import config from "../../config";
 import { Stripe } from "stripe";
 
 const createPayment = async (customerId: string, bookingId: string) => {
-   // Booking exists?
    const booking = await prisma.booking.findUniqueOrThrow({
       where: {
          id: bookingId,
@@ -22,17 +21,14 @@ const createPayment = async (customerId: string, bookingId: string) => {
       },
    });
 
-   // Booking owner check
    if (booking.customerId !== customerId) {
       throw new Error("You are not authorized");
    }
 
-   // Technician must accept first
    if (booking.status !== BookingStatus.ACCEPTED) {
       throw new Error("Booking is not accepted yet");
    }
 
-   // Already paid?
    const existingPayment = await prisma.payment.findUnique({
       where: {
          bookingId,
@@ -43,10 +39,8 @@ const createPayment = async (customerId: string, bookingId: string) => {
       throw new Error("Payment already exists for this booking");
    }
 
-   // Stripe Checkout Session
    const session = await createCheckoutSession(booking.service.price, booking.id);
 
-   // Save payment
    const payment = await prisma.payment.create({
       data: {
          bookingId: booking.id,

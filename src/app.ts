@@ -5,7 +5,6 @@ import { globalErrorHandler } from "./middlewares/globalErrorHandler";
 import { notFound } from "./middlewares/notFound";
 
 import { authRoutes } from "./modules/auth/auth.routes";
-//import { userRoutes } from "./modules/user/user.routes";
 import { technicianRoutes } from "./modules/technician/technician.routes";
 import { categoryRoutes } from "./modules/category/category.routes";
 import { serviceRoute } from "./modules/service/service.route";
@@ -26,8 +25,6 @@ app.use(
    }),
 );
 
-// Stripe Webhook
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -36,9 +33,8 @@ app.get("/", (req: Request, res: Response) => {
    res.send("FixItNow API is running...");
 });
 
-// // Routes
 app.use("/api/auth", authRoutes);
-//app.use("/api/users", userRoutes);
+
 app.use("/api/technician", technicianRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/services", serviceRoute);
@@ -55,10 +51,8 @@ app.get("/payment/cancel", (req, res) => {
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/admin", adminRoutes);
 
-// // 404 Handler
 app.use(notFound);
 
-// // Global Error Handler
 app.use(globalErrorHandler);
 
 export default app;
