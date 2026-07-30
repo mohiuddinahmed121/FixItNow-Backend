@@ -1,0 +1,1 @@
+{"version":3,"file":"technician.interface.d.ts","sourceRoot":"","sources":["../../../../src/modules/technician/technician.interface.ts"],"names":[],"mappings":"AAAA,MAAM,WAAW,wBAAwB;IACtC,GAAG,CAAC,EAAE,MAAM,CAAC;IACb,UAAU,CAAC,EAAE,MAAM,CAAC;IACpB,MAAM,CAAC,EAAE,MAAM,EAAE,CAAC;IAClB,QAAQ,CAAC,EAAE,MAAM,CAAC;IAClB,UAAU,CAAC,EAAE,MAAM,CAAC;IACpB,WAAW,CAAC,EAAE,OAAO,CAAC;CACxB"}

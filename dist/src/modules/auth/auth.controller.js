@@ -1,0 +1,67 @@
+import httpStatus from "http-status";
+import { catchAsync } from "../../utils/catchAsync";
+import { sendResponse } from "../../utils/sendResponse";
+import { authService } from "./auth.service";
+const registerUser = catchAsync(async (req, res) => {
+    const result = await authService.registerUser(req.body);
+    res.cookie("refreshToken", result.refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+    });
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.CREATED,
+        message: "User registered successfully",
+        data: {
+            accessToken: result.accessToken,
+            user: result.user,
+        },
+    });
+});
+const loginUser = catchAsync(async (req, res) => {
+    const result = await authService.loginUser(req.body);
+    res.cookie("refreshToken", result.refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+    });
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "User logged in successfully",
+        data: {
+            accessToken: result.accessToken,
+            user: result.user,
+        },
+    });
+});
+const refreshToken = catchAsync(async (req, res) => {
+    const token = req.cookies.refreshToken;
+    if (!token) {
+        throw new Error("Refresh token is required");
+    }
+    const result = await authService.refreshToken(token);
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Access token generated successfully",
+        data: result,
+    });
+});
+const getMe = catchAsync(async (req, res) => {
+    const result = await authService.getMe(req.user.id);
+    sendResponse(res, {
+        success: true,
+        statusCode: httpStatus.OK,
+        message: "Profile retrieved successfully",
+        data: result,
+    });
+});
+export const authController = {
+    registerUser,
+    loginUser,
+    refreshToken,
+    getMe,
+};
+//# sourceMappingURL=auth.controller.js.map
