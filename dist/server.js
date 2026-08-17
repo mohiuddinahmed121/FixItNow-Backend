@@ -1182,20 +1182,26 @@ var updateBookingStatus = async (bookingId, technicianId, status) => {
   if (booking.service.technicianProfileId !== technicianProfile.id) {
     throw new Error("You are not authorized to update this booking");
   }
-  if (booking.status === BookingStatus.REQUESTED && status !== BookingStatus.ACCEPTED && status !== BookingStatus.DECLINED) {
-    throw new Error("Invalid booking status transition");
+  if (booking.status === BookingStatus.REQUESTED) {
+    if (status !== BookingStatus.ACCEPTED && status !== BookingStatus.DECLINED) {
+      throw new Error("Invalid booking status transition");
+    }
   }
-  if (booking.status === BookingStatus.ACCEPTED && status !== BookingStatus.IN_PROGRESS) {
-    throw new Error("Invalid booking status transition");
+  if (booking.status === BookingStatus.ACCEPTED) {
+    throw new Error("Customer must complete payment before starting the service");
   }
-  if (booking.status === BookingStatus.IN_PROGRESS && status !== BookingStatus.COMPLETED) {
-    throw new Error("Invalid booking status transition");
+  if (booking.status === BookingStatus.PAID) {
+    if (status !== BookingStatus.IN_PROGRESS) {
+      throw new Error("Invalid booking status transition");
+    }
   }
-  if (booking.status === BookingStatus.DECLINED || booking.status === BookingStatus.COMPLETED) {
+  if (booking.status === BookingStatus.IN_PROGRESS) {
+    if (status !== BookingStatus.COMPLETED) {
+      throw new Error("Invalid booking status transition");
+    }
+  }
+  if (booking.status === BookingStatus.DECLINED || booking.status === BookingStatus.COMPLETED || booking.status === BookingStatus.CANCELED) {
     throw new Error("Booking can no longer be updated");
-  }
-  if (booking.status === BookingStatus.PAID && status !== BookingStatus.IN_PROGRESS) {
-    throw new Error("Invalid booking status transition");
   }
   return await prisma.booking.update({
     where: {
@@ -1383,8 +1389,10 @@ var createCheckoutSession = async (amount, bookingId) => {
         quantity: 1
       }
     ],
-    success_url: `${config_default.app_url}/payment/success`,
-    cancel_url: `${config_default.app_url}/payment/cancel`,
+    // success_url: `${config.app_url}/payment/success`,
+    // cancel_url: `${config.app_url}/payment/cancel`,
+    success_url: `${config_default.app_url}/payment/success?bookingId=${bookingId}`,
+    cancel_url: `${config_default.app_url}/payment/cancel?bookingId=${bookingId}`,
     metadata: {
       bookingId
     }
@@ -1565,10 +1573,9 @@ var paymentController = {
 };
 
 // src/modules/payment/payment.routes.ts
-import express, { Router as Router6 } from "express";
+import { Router as Router6 } from "express";
 var router6 = Router6();
 router6.post("/create", auth(Role.CUSTOMER), paymentController.createPayment);
-router6.post("/webhook", express.raw({ type: "application/json" }), paymentController.stripeWebhook);
 router6.get("/", auth(Role.CUSTOMER), paymentController.getMyPayments);
 router6.get("/:paymentId", auth(Role.CUSTOMER), paymentController.getSinglePayment);
 var paymentRoutes = router6;
@@ -1857,12 +1864,16 @@ var adminRoutes = router8;
 
 // src/app.ts
 var app = express2();
-app.use("/api/payments/webhook", express2.raw({ type: "application/json" }));
 app.use(
   cors({
     origin: config_default.app_url,
     credentials: true
   })
+);
+app.post(
+  "/api/payments/webhook",
+  express2.raw({ type: "application/json" }),
+  paymentController.stripeWebhook
 );
 app.use(express2.json());
 app.use(express2.urlencoded({ extended: true }));
@@ -1876,12 +1887,6 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/services", serviceRoute);
 app.use("/api/bookings", bookingRoutes);
 app.use("/api/payments", paymentRoutes);
-app.get("/payment/success", (req, res) => {
-  res.status(200).send(" Payment Successful");
-});
-app.get("/payment/cancel", (req, res) => {
-  res.status(200).send(" Payment Cancelled");
-});
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/admin", adminRoutes);
 app.use(notFound);
