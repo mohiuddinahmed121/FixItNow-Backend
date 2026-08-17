@@ -170,28 +170,34 @@ const updateBookingStatus = async (
       throw new Error("You are not authorized to update this booking");
    }
 
+   if (booking.status === BookingStatus.REQUESTED) {
+      if (status !== BookingStatus.ACCEPTED && status !== BookingStatus.DECLINED) {
+         throw new Error("Invalid booking status transition");
+      }
+   }
+
+   if (booking.status === BookingStatus.ACCEPTED) {
+      throw new Error("Customer must complete payment before starting the service");
+   }
+
+   if (booking.status === BookingStatus.PAID) {
+      if (status !== BookingStatus.IN_PROGRESS) {
+         throw new Error("Invalid booking status transition");
+      }
+   }
+
+   if (booking.status === BookingStatus.IN_PROGRESS) {
+      if (status !== BookingStatus.COMPLETED) {
+         throw new Error("Invalid booking status transition");
+      }
+   }
+
    if (
-      booking.status === BookingStatus.REQUESTED &&
-      status !== BookingStatus.ACCEPTED &&
-      status !== BookingStatus.DECLINED
+      booking.status === BookingStatus.DECLINED ||
+      booking.status === BookingStatus.COMPLETED ||
+      booking.status === BookingStatus.CANCELED
    ) {
-      throw new Error("Invalid booking status transition");
-   }
-
-   if (booking.status === BookingStatus.ACCEPTED && status !== BookingStatus.IN_PROGRESS) {
-      throw new Error("Invalid booking status transition");
-   }
-
-   if (booking.status === BookingStatus.IN_PROGRESS && status !== BookingStatus.COMPLETED) {
-      throw new Error("Invalid booking status transition");
-   }
-
-   if (booking.status === BookingStatus.DECLINED || booking.status === BookingStatus.COMPLETED) {
       throw new Error("Booking can no longer be updated");
-   }
-
-   if (booking.status === BookingStatus.PAID && status !== BookingStatus.IN_PROGRESS) {
-      throw new Error("Invalid booking status transition");
    }
 
    return await prisma.booking.update({

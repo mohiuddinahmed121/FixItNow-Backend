@@ -25,8 +25,11 @@ export const createCheckoutSession = async (
          },
       ],
 
-      success_url: `${config.app_url}/payment/success`,
-      cancel_url: `${config.app_url}/payment/cancel`,
+      // success_url: `${config.app_url}/payment/success`,
+      // cancel_url: `${config.app_url}/payment/cancel`,
+
+      success_url: `${config.app_url}/payment/success?bookingId=${bookingId}`,
+      cancel_url: `${config.app_url}/payment/cancel?bookingId=${bookingId}`,
 
       metadata: {
          bookingId,
