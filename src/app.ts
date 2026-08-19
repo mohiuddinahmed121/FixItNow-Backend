@@ -17,9 +17,16 @@ import config from "./config";
 
 const app: Application = express();
 
+// app.use(
+//    cors({
+//       origin: config.app_url,
+//       credentials: true,
+//    }),
+// );
+
 app.use(
    cors({
-      origin: config.app_url,
+      origin: ["http://localhost:3000", "https://fixitnow-frontend-omega.vercel.app"],
       credentials: true,
    }),
 );
