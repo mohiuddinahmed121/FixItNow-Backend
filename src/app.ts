@@ -13,7 +13,7 @@ import { paymentRoutes } from "./modules/payment/payment.routes";
 import { paymentController } from "./modules/payment/payment.controller";
 import { reviewRoutes } from "./modules/review/review.routes";
 import { adminRoutes } from "./modules/admin/admin.routes";
-import config from "./config";
+// import config from "./config";
 
 const app: Application = express();
 
