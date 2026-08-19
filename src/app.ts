@@ -17,11 +17,26 @@ import config from "./config";
 
 const app: Application = express();
 
+// const allowedOrigins = ["http://localhost:3000", "https://fixitnow-frontend-omega.vercel.app"];
+
+// app.use(
+//    cors({
+//       origin: allowedOrigins,
+//       credentials: true,
+//    }),
+// );
+
 const allowedOrigins = ["http://localhost:3000", "https://fixitnow-frontend-omega.vercel.app"];
 
 app.use(
    cors({
-      origin: allowedOrigins,
+      origin: (origin, callback) => {
+         if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+         } else {
+            callback(new Error("Not allowed by CORS"));
+         }
+      },
       credentials: true,
    }),
 );
