@@ -41,14 +41,12 @@ app.use(
    }),
 );
 
-// Stripe webhook MUST receive the raw body
 app.post(
    "/api/payments/webhook",
    express.raw({ type: "application/json" }),
    paymentController.stripeWebhook,
 );
 
-// Normal request body parsers
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -63,7 +61,6 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/services", serviceRoute);
 app.use("/api/bookings", bookingRoutes);
 
-// Payment routes except webhook
 app.use("/api/payments", paymentRoutes);
 
 app.use("/api/reviews", reviewRoutes);

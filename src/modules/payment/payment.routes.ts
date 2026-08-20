@@ -7,7 +7,7 @@ const router = Router();
 
 router.post("/create", auth(Role.CUSTOMER), paymentController.createPayment);
 
-// router.post("/webhook", express.raw({ type: "application/json" }), paymentController.stripeWebhook);
+router.post("/webhook", express.raw({ type: "application/json" }), paymentController.stripeWebhook);
 
 router.get("/", auth(Role.CUSTOMER), paymentController.getMyPayments);
 
