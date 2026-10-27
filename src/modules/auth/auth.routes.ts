@@ -13,4 +13,8 @@ router.post("/refresh-token", authController.refreshToken);
 
 router.get("/me", auth(), authController.getMe);
 
+router.patch("/me", auth(), authController.updateMe);
+
+router.patch("/change-password", auth(), authController.changePassword);
+
 export const authRoutes = router;

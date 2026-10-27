@@ -9,3 +9,13 @@ export interface ILoginUser {
    email: string;
    password: string;
 }
+
+export interface IUpdateMe {
+   name?: string;
+   phone?: string | null;
+}
+
+export interface IChangePassword {
+   currentPassword: string;
+   newPassword: string;
+}

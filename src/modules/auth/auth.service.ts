@@ -3,7 +3,7 @@ import { JwtPayload, SignOptions } from "jsonwebtoken";
 import { ActiveStatus } from "../../../generated/prisma/enums";
 import { prisma } from "../../lib/prisma";
 import { jwtUtils } from "../../utils/jwt";
-import { ILoginUser, IRegisterUser } from "./auth.interface";
+import { IChangePassword, ILoginUser, IRegisterUser, IUpdateMe } from "./auth.interface";
 import config from "../../config";
 
 const registerUser = async (payload: IRegisterUser) => {
@@ -158,9 +158,99 @@ const getMe = async (userId: string) => {
    });
 };
 
+const PHONE_PATTERN = /^\+?[0-9\s-]{7,20}$/;
+
+const updateMe = async (userId: string, payload: IUpdateMe) => {
+   const data: { name?: string; phone?: string | null } = {};
+
+   if (payload.name !== undefined) {
+      const name = String(payload.name).trim();
+
+      if (name.length < 2 || name.length > 100) {
+         throw new Error("Name must be between 2 and 100 characters");
+      }
+
+      data.name = name;
+   }
+
+   if (payload.phone !== undefined) {
+      const phone = payload.phone === null ? "" : String(payload.phone).trim();
+
+      if (phone === "") {
+         data.phone = null;
+      } else {
+         if (!PHONE_PATTERN.test(phone)) {
+            throw new Error("Phone number must be 7-20 digits and may start with +");
+         }
+
+         data.phone = phone;
+      }
+   }
+
+   if (Object.keys(data).length === 0) {
+      throw new Error("Nothing to update");
+   }
+
+   return await prisma.user.update({
+      where: {
+         id: userId,
+      },
+      data,
+      omit: {
+         password: true,
+      },
+      include: {
+         technicianProfile: true,
+      },
+   });
+};
+
+const changePassword = async (userId: string, payload: IChangePassword) => {
+   const { currentPassword, newPassword } = payload;
+
+   if (!currentPassword || !newPassword) {
+      throw new Error("Current password and new password are required");
+   }
+
+   if (typeof newPassword !== "string" || newPassword.length < 8) {
+      throw new Error("New password must be at least 8 characters");
+   }
+
+   if (currentPassword === newPassword) {
+      throw new Error("New password must be different from the current password");
+   }
+
+   const user = await prisma.user.findUniqueOrThrow({
+      where: {
+         id: userId,
+      },
+   });
+
+   const isPasswordMatched = await bcrypt.compare(currentPassword, user.password);
+
+   if (!isPasswordMatched) {
+      throw new Error("Current password is incorrect");
+   }
+
+   const hashedPassword = await bcrypt.hash(newPassword, Number(config.bcrypt_salt_rounds));
+
+   await prisma.user.update({
+      where: {
+         id: userId,
+      },
+      data: {
+         password: hashedPassword,
+      },
+   });
+
+   return null;
+};
+
 export const authService = {
    registerUser,
    loginUser,
    refreshToken,
    getMe,
+   updateMe,
+   changePassword,
 };

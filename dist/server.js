@@ -565,11 +565,81 @@ var getMe = async (userId) => {
     }
   });
 };
+var PHONE_PATTERN = /^\+?[0-9\s-]{7,20}$/;
+var updateMe = async (userId, payload) => {
+  const data = {};
+  if (payload.name !== void 0) {
+    const name = String(payload.name).trim();
+    if (name.length < 2 || name.length > 100) {
+      throw new Error("Name must be between 2 and 100 characters");
+    }
+    data.name = name;
+  }
+  if (payload.phone !== void 0) {
+    const phone = payload.phone === null ? "" : String(payload.phone).trim();
+    if (phone === "") {
+      data.phone = null;
+    } else {
+      if (!PHONE_PATTERN.test(phone)) {
+        throw new Error("Phone number must be 7-20 digits and may start with +");
+      }
+      data.phone = phone;
+    }
+  }
+  if (Object.keys(data).length === 0) {
+    throw new Error("Nothing to update");
+  }
+  return await prisma.user.update({
+    where: {
+      id: userId
+    },
+    data,
+    omit: {
+      password: true
+    },
+    include: {
+      technicianProfile: true
+    }
+  });
+};
+var changePassword = async (userId, payload) => {
+  const { currentPassword, newPassword } = payload;
+  if (!currentPassword || !newPassword) {
+    throw new Error("Current password and new password are required");
+  }
+  if (typeof newPassword !== "string" || newPassword.length < 8) {
+    throw new Error("New password must be at least 8 characters");
+  }
+  if (currentPassword === newPassword) {
+    throw new Error("New password must be different from the current password");
+  }
+  const user = await prisma.user.findUniqueOrThrow({
+    where: {
+      id: userId
+    }
+  });
+  const isPasswordMatched = await bcrypt.compare(currentPassword, user.password);
+  if (!isPasswordMatched) {
+    throw new Error("Current password is incorrect");
+  }
+  const hashedPassword = await bcrypt.hash(newPassword, Number(config_default.bcrypt_salt_rounds));
+  await prisma.user.update({
+    where: {
+      id: userId
+    },
+    data: {
+      password: hashedPassword
+    }
+  });
+  return null;
+};
 var authService = {
   registerUser,
   loginUser,
   refreshToken,
-  getMe
+  getMe,
+  updateMe,
+  changePassword
 };
 
 // src/modules/auth/auth.controller.ts
@@ -629,11 +699,31 @@ var getMe2 = catchAsync(async (req, res) => {
     data: result
   });
 });
+var updateMe2 = catchAsync(async (req, res) => {
+  const result = await authService.updateMe(req.user.id, req.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus3.OK,
+    message: "Profile updated successfully",
+    data: result
+  });
+});
+var changePassword2 = catchAsync(async (req, res) => {
+  await authService.changePassword(req.user.id, req.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: httpStatus3.OK,
+    message: "Password changed successfully",
+    data: null
+  });
+});
 var authController = {
   registerUser: registerUser2,
   loginUser: loginUser2,
   refreshToken: refreshToken2,
-  getMe: getMe2
+  getMe: getMe2,
+  updateMe: updateMe2,
+  changePassword: changePassword2
 };
 
 // src/modules/auth/auth.routes.ts
@@ -642,6 +732,8 @@ router.post("/register", authController.registerUser);
 router.post("/login", authController.loginUser);
 router.post("/refresh-token", authController.refreshToken);
 router.get("/me", auth(), authController.getMe);
+router.patch("/me", auth(), authController.updateMe);
+router.patch("/change-password", auth(), authController.changePassword);
 var authRoutes = router;
 
 // src/modules/technician/technician.routes.ts
@@ -1573,9 +1665,10 @@ var paymentController = {
 };
 
 // src/modules/payment/payment.routes.ts
-import { Router as Router6 } from "express";
+import express, { Router as Router6 } from "express";
 var router6 = Router6();
 router6.post("/create", auth(Role.CUSTOMER), paymentController.createPayment);
+router6.post("/webhook", express.raw({ type: "application/json" }), paymentController.stripeWebhook);
 router6.get("/", auth(Role.CUSTOMER), paymentController.getMyPayments);
 router6.get("/:paymentId", auth(Role.CUSTOMER), paymentController.getSinglePayment);
 var paymentRoutes = router6;
@@ -1864,9 +1957,16 @@ var adminRoutes = router8;
 
 // src/app.ts
 var app = express2();
+var allowedOrigins = ["http://localhost:3000", "https://fixitnow-frontend-omega.vercel.app"];
 app.use(
   cors({
-    origin: config_default.app_url,
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true
   })
 );
