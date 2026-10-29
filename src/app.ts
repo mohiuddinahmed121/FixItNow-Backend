@@ -13,6 +13,7 @@ import { paymentRoutes } from "./modules/payment/payment.routes";
 import { paymentController } from "./modules/payment/payment.controller";
 import { reviewRoutes } from "./modules/review/review.routes";
 import { adminRoutes } from "./modules/admin/admin.routes";
+import { contactRoutes } from "./modules/contact/contact.routes";
 // import config from "./config";
 
 const app: Application = express();
@@ -65,6 +66,7 @@ app.use("/api/payments", paymentRoutes);
 
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/admin", adminRoutes);
+app.use("/api/contact", contactRoutes);
 
 app.use(notFound);
 app.use(globalErrorHandler);
